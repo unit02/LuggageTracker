@@ -25,7 +25,13 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.ValueEventListener;
 
+import mecs.hci.luggagetracker.MainActivity;
+import mecs.hci.luggagetracker.Models.User;
 import mecs.hci.luggagetracker.R;
 
 public class LoginActivity extends AppCompatActivity implements
@@ -33,16 +39,11 @@ public class LoginActivity extends AppCompatActivity implements
 
     private static final String TAG = "FacebookLogin";
 
-    private TextView mStatusTextView;
-    private TextView mDetailTextView;
 
-    // [START declare_auth]
     private FirebaseAuth mAuth;
-    // [END declare_auth]
-
-    // [START declare_auth_listener]
     private FirebaseAuth.AuthStateListener mAuthListener;
-    // [END declare_auth_listener]
+
+    private DatabaseReference mDatabase;
 
     private CallbackManager mCallbackManager;
 
@@ -52,37 +53,27 @@ public class LoginActivity extends AppCompatActivity implements
         FacebookSdk.sdkInitialize(getApplicationContext());
         setContentView(R.layout.activity_login);
 
-        // Views
-        mStatusTextView = (TextView) findViewById(R.id.status);
-        mDetailTextView = (TextView) findViewById(R.id.detail);
         findViewById(R.id.button_facebook_signout).setOnClickListener(this);
 
-        // [START initialize_auth]
-        // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
-        // [END initialize_auth]
 
-        // [START auth_state_listener]
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
-                    // User is signed in
                     Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
+                    writeNewUser();
+
+
+
                 } else {
-                    // User is signed out
                     Log.d(TAG, "onAuthStateChanged:signed_out");
                 }
-                // [START_EXCLUDE]
-                updateUI(user);
-                // [END_EXCLUDE]
             }
         };
-        // [END auth_state_listener]
 
-        // [START initialize_fblogin]
-        // Initialize Facebook Login button
+
         mCallbackManager = CallbackManager.Factory.create();
         LoginButton loginButton = (LoginButton) findViewById(R.id.button_facebook_login);
         loginButton.setReadPermissions("email", "public_profile");
@@ -96,17 +87,11 @@ public class LoginActivity extends AppCompatActivity implements
             @Override
             public void onCancel() {
                 Log.d(TAG, "facebook:onCancel");
-                // [START_EXCLUDE]
-                updateUI(null);
-                // [END_EXCLUDE]
             }
 
             @Override
             public void onError(FacebookException error) {
                 Log.d(TAG, "facebook:onError", error);
-                // [START_EXCLUDE]
-                updateUI(null);
-                // [END_EXCLUDE]
             }
         });
         // [END initialize_fblogin]
@@ -167,22 +152,39 @@ public class LoginActivity extends AppCompatActivity implements
         mAuth.signOut();
         LoginManager.getInstance().logOut();
 
-        updateUI(null);
     }
 
-    private void updateUI(FirebaseUser user) {
-        if (user != null) {
-            mStatusTextView.setText(getString(R.string.facebook_status_fmt, user.getDisplayName()));
 
-            findViewById(R.id.button_facebook_login).setVisibility(View.GONE);
-            findViewById(R.id.button_facebook_signout).setVisibility(View.VISIBLE);
-        } else {
-            mStatusTextView.setText(R.string.signed_out);
-            mDetailTextView.setText(null);
 
-            findViewById(R.id.button_facebook_login).setVisibility(View.VISIBLE);
-            findViewById(R.id.button_facebook_signout).setVisibility(View.GONE);
-        }
+    // On authentication, push a new user to the database
+    private void writeNewUser() {
+        mDatabase.child("users").child(mAuth.getCurrentUser().getUid()).addValueEventListener(
+                new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        if (dataSnapshot.exists() != true) {
+                            FirebaseUser fbUser = mAuth.getCurrentUser();
+                            User user = new User(fbUser.getDisplayName(), fbUser.getEmail());
+                            mDatabase.child("users").child(fbUser.getUid()).setValue(user);
+                            goToNewUser();
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                }
+        );
+    }
+
+
+    private void goToNewUser() {
+        startActivity(new Intent(this, MainActivity.class));
+        finish();
+    }
+
+    private void goToApplication() {
     }
 
     @Override
