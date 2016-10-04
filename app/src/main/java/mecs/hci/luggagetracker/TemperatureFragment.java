@@ -1,5 +1,6 @@
 package mecs.hci.luggagetracker;
 
+import android.app.Activity;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
@@ -27,8 +28,6 @@ public class TemperatureFragment extends Fragment {
 
     private TextView temperatureTextView;
 
-    private OnFragmentInteractionListener mListener;
-
     public TemperatureFragment() {
         // Required empty public constructor
     }
@@ -42,34 +41,30 @@ public class TemperatureFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        bean = CurrentBean.getBean();
-        temperatureTextView = (TextView) getActivity().findViewById(R.id.currentTempTextView);
-        startMonitoringTemperature();
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_temperature, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_temperature, container, false);
+        temperatureTextView = (TextView)rootView.findViewById(R.id.currentTempTextView);
+        bean = CurrentBean.getBean();
+        startMonitoringTemperature();
+
+        return rootView;
     }
 
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
     }
 
     @Override
     public void onDetach() {
         super.onDetach();
-        mListener = null;
     }
 
     private void startMonitoringTemperature(){
@@ -82,7 +77,7 @@ public class TemperatureFragment extends Fragment {
                         Log.d(TAG, "Current Temperature is: " + Integer.toString(result));
                         getActivity().runOnUiThread(new Runnable() {
                             public void run() {
-                                temperatureTextView.setText(Integer.toString(result));
+                              temperatureTextView.setText(Integer.toString(result));
                             }
                         });
                     }
@@ -90,7 +85,5 @@ public class TemperatureFragment extends Fragment {
             }
         }, 0, 250);    }
 
-    public interface OnFragmentInteractionListener {
-        void onFragmentInteraction(Uri uri);
-    }
+
 }

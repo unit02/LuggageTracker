@@ -19,7 +19,7 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
             case 1:
                 return new Tab2();
             case 2:
-                return new Tab1Fragment();
+                return new TemperatureFragment();
         }
         return new Tab1Fragment();
     }
@@ -28,5 +28,7 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
     public int getCount() {
         return 3;           // As there are only 3 Tabs
     }
+
+
 
 }
