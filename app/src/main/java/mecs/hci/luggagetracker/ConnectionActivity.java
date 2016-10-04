@@ -89,7 +89,7 @@ private ProgressBar loadingSpinner;
                             });
                             Intent intent = new Intent(ConnectionActivity.this, SensorViewActivity.class);
                             startActivity(intent);
-
+                            CurrentBean.setBean(bean);
                         }
 
                         @Override
