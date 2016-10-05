@@ -12,17 +12,19 @@ import android.widget.TextView;
 import com.punchthrough.bean.sdk.Bean;
 import com.punchthrough.bean.sdk.message.Callback;
 
+import java.util.Date;
+import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
 
 public class LightFragment extends Fragment {
 
-    public static String TAG = "TemperatureFragment";
+    public static String TAG = "lightFragment";
 
     Bean bean;
 
-    private TextView temperatureTextView;
+    private TextView lightTextView;
 
     public LightFragment() {
         // Required empty public constructor
@@ -44,10 +46,11 @@ public class LightFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View rootView = inflater.inflate(R.layout.fragment_temperature, container, false);
-        temperatureTextView = (TextView)rootView.findViewById(R.id.currentTempTextView);
+        int value = (int) (new Date().getTime()/1000);
+        View rootView = inflater.inflate(R.layout.fragment_light, container, false);
+        lightTextView = (TextView)rootView.findViewById(R.id.currentlightTextView);
         bean = CurrentBean.getBean();
-        startMonitoringTemperature();
+        startMonitoringlight();
 
         return rootView;
     }
@@ -63,21 +66,19 @@ public class LightFragment extends Fragment {
         super.onDetach();
     }
 
-    private void startMonitoringTemperature(){
+    private void startMonitoringlight(){
+
         new Timer().scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
-                bean.readTemperature(new Callback<Integer>() {
-                    @Override
-                    public void onResult(final Integer result) {
-                        Log.d(TAG, "Current Temperature is: " + Integer.toString(result));
-                        getActivity().runOnUiThread(new Runnable() {
-                            public void run() {
-                              temperatureTextView.setText(Integer.toString(result));
-                            }
-                        });
+              //update value ever 5 seconds
+                getActivity().runOnUiThread(new Runnable() {
+                    public void run() {
+                        //uget randomly changing numbers
+                        lightTextView.setText("100 lux");
                     }
                 });
+
             }
         }, 0, 250);    }
 
