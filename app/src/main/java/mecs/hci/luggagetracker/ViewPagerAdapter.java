@@ -1,8 +1,8 @@
 package mecs.hci.luggagetracker;
 
-        import android.support.v4.app.Fragment;
-        import android.support.v4.app.FragmentManager;
-        import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentStatePagerAdapter;
 
 
 public class ViewPagerAdapter extends FragmentStatePagerAdapter {
@@ -17,7 +17,7 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
             case 0:
                 return new Tab1Fragment();
             case 1:
-                return new Tab2();
+                return new Tab2Fragment();
             case 2:
                 return new TemperatureFragment();
         }
