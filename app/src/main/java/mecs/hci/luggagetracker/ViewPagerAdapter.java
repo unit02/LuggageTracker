@@ -15,13 +15,13 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
     public Fragment getItem(int position) {
         switch (position){
             case 0:
-                return new Tab1Fragment();
+                return new AccelerometerFragment();
             case 1:
-                return new Tab2();
+                return new LightFragment();
             case 2:
                 return new TemperatureFragment();
         }
-        return new Tab1Fragment();
+        return new LightFragment();
     }
 
     @Override
