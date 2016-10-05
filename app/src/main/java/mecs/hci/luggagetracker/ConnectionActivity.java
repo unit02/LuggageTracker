@@ -62,6 +62,8 @@ private ProgressBar loadingSpinner;
         final Context self = this;
         final List<Bean> beans = new ArrayList<>();
 
+        loadingProgressTextView.setText("Searching for Bean...");
+
         BeanDiscoveryListener listener = new BeanDiscoveryListener() {
             @Override
             public void onBeanDiscovered(Bean bean, int rssi) {
@@ -70,6 +72,10 @@ private ProgressBar loadingSpinner;
 
             @Override
             public void onDiscoveryComplete() {
+                if (beans.size() == 0) {
+                    loadingProgressTextView.setText("Failed to find bean");
+                }
+
                 for (final Bean bean : beans) {
                     Log.w(TAG, bean.getDevice().getName());       // "Bean"              (example)
                     Log.w(TAG, bean.getDevice().getAddress());    // "B4:99:4C:1E:BC:75" (example)
@@ -125,11 +131,12 @@ private ProgressBar loadingSpinner;
                 }
             }
         };
-        int name = 0;
-        ActivityCompat.requestPermissions(this,
-                new String[]{Manifest.permission.ACCESS_COARSE_LOCATION},
-                name);
+//        int name = 0;
+//        ActivityCompat.requestPermissions(this,
+//                new String[]{Manifest.permission.ACCESS_COARSE_LOCATION},
+//                name);
         BeanManager bm = BeanManager.getInstance();
+        //bm.setScanTimeout(45);
         bm.startDiscovery(listener);
     }
 
