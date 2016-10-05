@@ -18,11 +18,11 @@ import java.util.TimerTask;
 
 public class LocationFragment extends Fragment {
 
-    public static String TAG = "TemperatureFragment";
+    public static String TAG = "LocationFragment";
 
     Bean bean;
 
-    private TextView temperatureTextView;
+    private TextView LocationTextView;
 
     public LocationFragment() {
         // Required empty public constructor
@@ -41,10 +41,10 @@ public class LocationFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View rootView = inflater.inflate(R.layout.fragment_temperature, container, false);
-        temperatureTextView = (TextView)rootView.findViewById(R.id.currentTempTextView);
+        View rootView = inflater.inflate(R.layout.fragment_location, container, false);
+        LocationTextView = (TextView)rootView.findViewById(R.id.currentTempTextView);
         bean = CurrentBean.getBean();
-        startMonitoringTemperature();
+        startMonitoringLocation();
 
         return rootView;
     }
@@ -60,21 +60,11 @@ public class LocationFragment extends Fragment {
         super.onDetach();
     }
 
-    private void startMonitoringTemperature(){
+    private void startMonitoringLocation(){
         new Timer().scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
-                bean.readTemperature(new Callback<Integer>() {
-                    @Override
-                    public void onResult(final Integer result) {
-                        Log.d(TAG, "Current Temperature is: " + Integer.toString(result));
-                        getActivity().runOnUiThread(new Runnable() {
-                            public void run() {
-                              temperatureTextView.setText(Integer.toString(result));
-                            }
-                        });
-                    }
-                });
+          //upadte location on google maps every 5 seconds or so
             }
         }, 0, 250);    }
 

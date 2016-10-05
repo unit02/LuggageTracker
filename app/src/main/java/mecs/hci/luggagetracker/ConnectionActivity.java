@@ -33,7 +33,6 @@ private TextView loadingProgressTextView;
 private BluetoothAdapter bluetoothAdapter;
 private ProgressBar loadingSpinner;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
