@@ -41,6 +41,7 @@ private ProgressBar loadingSpinner;
         bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         loadingSpinner = (ProgressBar) findViewById(R.id.loadingSpinner);
 
+        //TODO after 45 seconds restart activity
         //TODO make it so that the listner is set up once bluetooth is on
 //        if (!bluetoothAdapter.isEnabled())
 //        {
@@ -93,12 +94,14 @@ private ProgressBar loadingSpinner;
 
                         @Override
                         public void onConnectionFailed() {
-                            Log.w(TAG, "Bean connection failed!");
+                            Log.w(TAG, "Bean connection failed! Try again");
+                            setUpListener();
                         }
 
                         @Override
                         public void onDisconnected() {
                             Log.w(TAG, "Bean disconnected!");
+                            setUpListener();
                         }
 
                         @Override
@@ -112,6 +115,7 @@ private ProgressBar loadingSpinner;
                         @Override
                         public void onError(BeanError error) {
                             Log.w(TAG, "Bean error!");
+                            setUpListener();
                         }
 
                         @Override

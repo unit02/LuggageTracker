@@ -12,6 +12,8 @@ import android.widget.TextView;
 import com.punchthrough.bean.sdk.Bean;
 import com.punchthrough.bean.sdk.message.Callback;
 
+import java.util.Date;
+import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -44,8 +46,9 @@ public class LightFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        int value = (int) (new Date().getTime()/1000);
         View rootView = inflater.inflate(R.layout.fragment_light, container, false);
-        lightTextView = (TextView)rootView.findViewById(R.id.currentTempTextView);
+        lightTextView = (TextView)rootView.findViewById(R.id.currentlightTextView);
         bean = CurrentBean.getBean();
         startMonitoringlight();
 
@@ -64,10 +67,18 @@ public class LightFragment extends Fragment {
     }
 
     private void startMonitoringlight(){
+
         new Timer().scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
               //update value ever 5 seconds
+                getActivity().runOnUiThread(new Runnable() {
+                    public void run() {
+                        //uget randomly changing numbers
+                        lightTextView.setText("100 lux");
+                    }
+                });
+
             }
         }, 0, 250);    }
 

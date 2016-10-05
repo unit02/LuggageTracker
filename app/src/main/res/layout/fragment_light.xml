@@ -5,7 +5,7 @@
     tools:context="mecs.hci.luggagetracker.LightFragment">
 
     <TextView
-        android:text="Current light:"
+        android:text="Current Lux: "
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/currentlightTitleTextView"
@@ -14,7 +14,7 @@
         android:text="TextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/currentcurrentlightTitleTextViewTextView"
+        android:id="@+id/currentlightTextView"
         android:layout_toRightOf="@id/currentlightTitleTextView"/>
 
 

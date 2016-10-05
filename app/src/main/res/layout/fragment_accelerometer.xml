@@ -14,8 +14,20 @@
         android:text="TextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/currentcurrentaccelerometerTitleTextViewTextView"
+        android:id="@+id/xAxisAccelerationTextView"
         android:layout_toRightOf="@id/currentaccelerometerTitleTextView"/>
+    <TextView
+        android:text="TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/yAxisAccelerationTextView"
+        android:layout_toRightOf="@id/xAxisAccelerationTextView"/>
+    <TextView
+        android:text="TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/zAxisAccelerationTextView"
+        android:layout_toRightOf="@id/yAxisAccelerationTextView"/>
 
 
 </RelativeLayout>
