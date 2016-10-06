@@ -2,6 +2,7 @@ package mecs.hci.luggagetracker;
 
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 
@@ -10,7 +11,7 @@ public class SensorViewActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_sensors);
 
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
@@ -39,8 +40,9 @@ public class SensorViewActivity extends AppCompatActivity {
         tabLayout.addTab(locationTab, 3);
 
         // Setup tab colours
-        //tabLayout.setTabTextColors(ContextCompat.getColorStateList(this, R.color.tab_selector));
-        //tabLayout.setSelectedTabIndicatorColor(ContextCompat.getColor(this, R.color.indicator));
+        tabLayout.setTabTextColors(ContextCompat.getColorStateList(this, R.color.white));
+        tabLayout.setBackgroundColor(ContextCompat.getColor(this, R.color.tab_default));
+        tabLayout.setSelectedTabIndicatorColor(ContextCompat.getColor(this, R.color.tab_indicator));
 
         // setting up the tabs to chage when the viewpager changes
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));

@@ -21,10 +21,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ConnectionActivity extends AppCompatActivity {
+
     public static String TAG = "ConnectionActivity";
-private TextView loadingProgressTextView;
-//private BluetoothAdapter bluetoothAdapter;
-//private ProgressBar loadingSpinner;
+
+    private TextView loadingProgressTextView;
+    //private BluetoothAdapter bluetoothAdapter;
+    //private ProgressBar loadingSpinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
