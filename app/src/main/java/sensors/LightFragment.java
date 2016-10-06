@@ -24,6 +24,8 @@ public class LightFragment extends Fragment {
 
     private TextView lightTextView;
 
+    private Timer timer;
+
     public LightFragment() {
         // Required empty public constructor
     }
@@ -66,7 +68,8 @@ public class LightFragment extends Fragment {
 
     private void startMonitoringlight(){
 
-        new Timer().scheduleAtFixedRate(new TimerTask() {
+        timer = new Timer();
+        timer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
               //update value ever 5 seconds
@@ -78,7 +81,16 @@ public class LightFragment extends Fragment {
                 });
 
             }
-        }, 0, 250);    }
+        }, 0, 250);
+    }
+
+    @Override
+    public void onPause() {
+        if (timer != null) {
+            timer.cancel();
+        }
+        super.onPause();
+    }
 
 
 }

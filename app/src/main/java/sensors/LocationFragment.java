@@ -23,6 +23,8 @@ public class LocationFragment extends Fragment {
 
     private TextView LocationTextView;
 
+    private Timer timer;
+
     public LocationFragment() {
         // Required empty public constructor
     }
@@ -60,12 +62,21 @@ public class LocationFragment extends Fragment {
     }
 
     private void startMonitoringLocation(){
-        new Timer().scheduleAtFixedRate(new TimerTask() {
+        timer = new Timer();
+        timer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
           //upadte location on google maps every 5 seconds or so
             }
-        }, 0, 250);    }
+        }, 0, 250);
+    }
 
+    @Override
+    public void onPause() {
+        if (timer != null) {
+            timer.cancel();
+        }
+        super.onPause();
+    }
 
 }

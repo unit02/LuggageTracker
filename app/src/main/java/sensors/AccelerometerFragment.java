@@ -29,6 +29,8 @@ public class AccelerometerFragment extends Fragment {
     private TextView  YTextView;
     private TextView  ZTextView;
 
+    private Timer timer;
+
     public AccelerometerFragment() {
         // Required empty public constructor
     }
@@ -77,7 +79,8 @@ public class AccelerometerFragment extends Fragment {
     }
 
     private void startMonitoringAccelerometer(){
-        new Timer().scheduleAtFixedRate(new TimerTask() {
+        timer = new Timer();
+        timer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
                 bean.readAcceleration(new Callback<Acceleration>() {
@@ -93,7 +96,14 @@ public class AccelerometerFragment extends Fragment {
                     }
                 });
             }
-        }, 0, 250);    }
+        }, 0, 250);
+    }
 
-
+    @Override
+    public void onPause() {
+        if (timer !=  null) {
+            timer.cancel();
+        }
+        super.onPause();
+    }
 }
