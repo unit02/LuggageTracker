@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 
 import sensors.AccelerometerFragment;
 import sensors.LightFragment;
+import sensors.LocationFragment;
 import sensors.TemperatureFragment;
 
 
@@ -24,13 +25,15 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
                 return new LightFragment();
             case 2:
                 return new TemperatureFragment();
+            case 3:
+                return new LocationFragment();
         }
         return new LightFragment();
     }
 
     @Override
     public int getCount() {
-        return 3;           // As there are only 3 Tabs
+        return 4;           // As there are only 3 Tabs
     }
 
 

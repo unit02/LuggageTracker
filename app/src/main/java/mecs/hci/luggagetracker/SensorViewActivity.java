@@ -24,16 +24,19 @@ public class SensorViewActivity extends AppCompatActivity {
         final TabLayout.Tab accelerometerTab = tabLayout.newTab();
         final TabLayout.Tab lightTab = tabLayout.newTab();
         final TabLayout.Tab temperatureTab = tabLayout.newTab();
+        final TabLayout.Tab locationTab = tabLayout.newTab();
 
         // Setting the title of the tabs
         accelerometerTab.setText("Accelerometer");
         lightTab.setText("Light");
         temperatureTab.setText("Temperature");
+        locationTab.setText("Location");
 
         // Add the tabs to the layout
         tabLayout.addTab(accelerometerTab, 0);
         tabLayout.addTab(lightTab, 1);
         tabLayout.addTab(temperatureTab, 2);
+        tabLayout.addTab(locationTab, 3);
 
         // Setup tab colours
         //tabLayout.setTabTextColors(ContextCompat.getColorStateList(this, R.color.tab_selector));
