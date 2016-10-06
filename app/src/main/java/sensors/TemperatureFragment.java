@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.punchthrough.bean.sdk.Bean;
 import com.punchthrough.bean.sdk.message.Callback;
@@ -57,7 +58,8 @@ public class TemperatureFragment extends Fragment {
         if (bean != null) {
             startMonitoringTemperature();
         } else {
-            // toast that it's not connected
+            Toast.makeText(getActivity(), "Bean not connected",
+                    Toast.LENGTH_LONG).show();
         }
 
         return rootView;

@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.punchthrough.bean.sdk.Bean;
 import com.punchthrough.bean.sdk.message.Acceleration;
@@ -61,7 +62,8 @@ public class AccelerometerFragment extends Fragment {
         if (bean != null) {
             startMonitoringAccelerometer();
         } else {
-            // toast that it's not connected
+            Toast.makeText(getActivity(), "Bean not connected, sensor data will not work",
+                    Toast.LENGTH_LONG).show();
         }
 
         return rootView;
