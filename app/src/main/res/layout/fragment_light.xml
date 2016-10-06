@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="mecs.hci.luggagetracker.LightFragment">
+    tools:context="mecs.hci.luggagetracker.sensors.LightFragment">
 
     <TextView
         android:text="Current Lux: "
