@@ -36,8 +36,7 @@ import mecs.hci.luggagetracker.Models.User;
 import mecs.hci.luggagetracker.R;
 import mecs.hci.luggagetracker.SensorViewActivity;
 
-public class LoginActivity extends AppCompatActivity implements
-        View.OnClickListener {
+public class LoginActivity extends AppCompatActivity {
 
     private static final String TAG = "FacebookLogin";
 
@@ -56,7 +55,6 @@ public class LoginActivity extends AppCompatActivity implements
         FacebookSdk.sdkInitialize(getApplicationContext());
         setContentView(R.layout.activity_login);
 
-        findViewById(R.id.button_facebook_signout).setOnClickListener(this);
 
         // Hide the status bar.
         View decorView = getWindow().getDecorView();
@@ -85,10 +83,7 @@ public class LoginActivity extends AppCompatActivity implements
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
                     Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
-//                    writeNewUser();
-
-
-
+                    goToApplication();
                 } else {
                     Log.d(TAG, "onAuthStateChanged:signed_out");
                 }
@@ -105,6 +100,7 @@ public class LoginActivity extends AppCompatActivity implements
             public void onSuccess(LoginResult loginResult) {
                 Log.d(TAG, "facebook:onSuccess:" + loginResult);
                 handleFacebookAccessToken(loginResult.getAccessToken());
+
             }
 
             @Override
@@ -165,6 +161,8 @@ public class LoginActivity extends AppCompatActivity implements
                             Toast.makeText(LoginActivity.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
                         }
+                        else {
+                        }
 
                     }
                 });
@@ -183,20 +181,9 @@ public class LoginActivity extends AppCompatActivity implements
     private void updateUI(FirebaseUser user) {
         if (user != null) {
             findViewById(R.id.button_facebook_login).setVisibility(View.GONE);
-            findViewById(R.id.button_facebook_signout).setVisibility(View.VISIBLE);
-            findViewById(R.id.button_go_to_application).setVisibility(View.VISIBLE);
         } else {
             findViewById(R.id.button_facebook_login).setVisibility(View.VISIBLE);
-            findViewById(R.id.button_facebook_signout).setVisibility(View.GONE);
-            findViewById(R.id.button_go_to_application).setVisibility(View.GONE);
-
         }
-    }
-
-
-    public void goToApplication(View view) {
-        startActivity(new Intent(this, ConnectionActivity.class));
-        finish();
     }
 
 
@@ -210,7 +197,7 @@ public class LoginActivity extends AppCompatActivity implements
                             FirebaseUser fbUser = mAuth.getCurrentUser();
                             User user = new User(fbUser.getDisplayName(), fbUser.getEmail());
                             mDatabase.child("users").child(fbUser.getUid()).setValue(user);
-                            goToNewUser();
+//                            goToNewUser();
                         }
                     }
 
@@ -223,21 +210,11 @@ public class LoginActivity extends AppCompatActivity implements
     }
 
 
-    private void goToNewUser() {
-        startActivity(new Intent(this, SensorViewActivity.class));
+    private void goToApplication() {
+        startActivity(new Intent(this, ConnectionActivity.class));
         finish();
     }
 
-    private void goToApplication() {
-    }
-
-    @Override
-    public void onClick(View v) {
-        int i = v.getId();
-        if (i == R.id.button_facebook_signout) {
-            signOut();
-        }
-    }
 
     @Override
     public void onResume() {
