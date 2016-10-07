@@ -4,18 +4,53 @@
     android:layout_height="match_parent"
     tools:context="mecs.hci.luggagetracker.sensors.LightFragment">
 
+
     <TextView
-        android:text="Current Lux: "
+        android:text="Light Intensity"
+        android:textSize="30dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/currentlightTitleTextView"
-        />
-    <TextView
-        android:text="TextView"
-        android:layout_width="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="42dp"
+        android:id="@+id/textView" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/currentlightTextView"
-        android:layout_toRightOf="@id/currentlightTitleTextView"/>
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:layout_below="@+id/textView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="133dp">
+        <TextView
+            android:text="Current Lux: "
+            android:textSize="24sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:gravity="center_vertical"
+            android:padding="5dp"
+            android:elevation="2dp"
+            android:layout_margin="3dp"
+            android:background="@drawable/rounded_green"
+            android:id="@+id/currentlightTitleTextView" />
+
+        <TextView
+            android:text="100 lux"
+            android:textSize="20sp"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:padding="5dp"
+            android:elevation="2dp"
+            android:layout_margin="3dp"
+            android:background="@drawable/rounded_blue"
+            android:textColor="@color/white"
+            android:id="@+id/currentlightTextView" />
+    </LinearLayout>
 
 
 </RelativeLayout>
