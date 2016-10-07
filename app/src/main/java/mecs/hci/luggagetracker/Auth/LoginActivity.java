@@ -39,11 +39,10 @@ public class LoginActivity extends AppCompatActivity implements
 
     private static final String TAG = "FacebookLogin";
 
-
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
-
     private DatabaseReference mDatabase;
+    private TextView mStatus;
 
     private CallbackManager mCallbackManager;
 
@@ -57,19 +56,30 @@ public class LoginActivity extends AppCompatActivity implements
 
         mAuth = FirebaseAuth.getInstance();
 
+        mAuth = FirebaseAuth.getInstance();
+        if (mAuth.getCurrentUser() != null) {
+            startActivity(new Intent(this, MainActivity.class));
+            finish();
+        }
+
+        mStatus = (TextView) findViewById(R.id.status);
+
+
+
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
                     Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
-                    writeNewUser();
+//                    writeNewUser();
 
 
 
                 } else {
                     Log.d(TAG, "onAuthStateChanged:signed_out");
                 }
+                updateUI(null);
             }
         };
 
@@ -87,11 +97,13 @@ public class LoginActivity extends AppCompatActivity implements
             @Override
             public void onCancel() {
                 Log.d(TAG, "facebook:onCancel");
+                updateUI(null);
             }
 
             @Override
             public void onError(FacebookException error) {
                 Log.d(TAG, "facebook:onError", error);
+                updateUI(null);
             }
         });
         // [END initialize_fblogin]
@@ -125,8 +137,6 @@ public class LoginActivity extends AppCompatActivity implements
     // [START auth_with_facebook]
     private void handleFacebookAccessToken(AccessToken token) {
         Log.d(TAG, "handleFacebookAccessToken:" + token);
-
-
         AuthCredential credential = FacebookAuthProvider.getCredential(token.getToken());
         mAuth.signInWithCredential(credential)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -151,9 +161,34 @@ public class LoginActivity extends AppCompatActivity implements
     public void signOut() {
         mAuth.signOut();
         LoginManager.getInstance().logOut();
+        updateUI(null);
+
 
     }
 
+
+    private void updateUI(FirebaseUser user) {
+        if (user != null) {
+
+            mStatus.setText("ID: " + user.getUid().toString());
+            findViewById(R.id.button_facebook_login).setVisibility(View.GONE);
+            findViewById(R.id.button_facebook_signout).setVisibility(View.VISIBLE);
+            findViewById(R.id.button_go_to_application).setVisibility(View.VISIBLE);
+        } else {
+            mStatus.setText("Nothing");
+
+            findViewById(R.id.button_facebook_login).setVisibility(View.VISIBLE);
+            findViewById(R.id.button_facebook_signout).setVisibility(View.GONE);
+            findViewById(R.id.button_go_to_application).setVisibility(View.GONE);
+
+        }
+    }
+
+
+    public void goToApplication(View view) {
+        startActivity(new Intent(this, MainActivity.class));
+        finish();
+    }
 
 
     // On authentication, push a new user to the database
