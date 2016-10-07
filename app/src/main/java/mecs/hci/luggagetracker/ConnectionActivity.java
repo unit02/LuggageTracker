@@ -1,22 +1,17 @@
 package mecs.hci.luggagetracker;
 
-import android.Manifest;
-import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
 import android.content.Intent;
-import android.support.v4.app.ActivityCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.punchthrough.bean.sdk.Bean;
 import com.punchthrough.bean.sdk.BeanDiscoveryListener;
 import com.punchthrough.bean.sdk.BeanListener;
 import com.punchthrough.bean.sdk.BeanManager;
-import com.punchthrough.bean.sdk.message.Acceleration;
 import com.punchthrough.bean.sdk.message.BeanError;
 import com.punchthrough.bean.sdk.message.Callback;
 import com.punchthrough.bean.sdk.message.DeviceInfo;
@@ -24,22 +19,22 @@ import com.punchthrough.bean.sdk.message.ScratchBank;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class ConnectionActivity extends AppCompatActivity {
+
     public static String TAG = "ConnectionActivity";
-private TextView loadingProgressTextView;
-private BluetoothAdapter bluetoothAdapter;
-private ProgressBar loadingSpinner;
+
+    private TextView loadingProgressTextView;
+    //private BluetoothAdapter bluetoothAdapter;
+    //private ProgressBar loadingSpinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_connection);
         loadingProgressTextView = (TextView) findViewById(R.id.loadingTextView) ;
-        bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-        loadingSpinner = (ProgressBar) findViewById(R.id.loadingSpinner);
+//        bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+//        loadingSpinner = (ProgressBar) findViewById(R.id.loadingSpinner);
 
         // Hide the status bar.
         View decorView = getWindow().getDecorView();
@@ -69,7 +64,7 @@ private ProgressBar loadingSpinner;
         final Context self = this;
         final List<Bean> beans = new ArrayList<>();
 
-        loadingProgressTextView.setText("Searching for Bean...");
+        loadingProgressTextView.setText(R.string.bean_searching);
 
         BeanDiscoveryListener listener = new BeanDiscoveryListener() {
             @Override
@@ -80,7 +75,7 @@ private ProgressBar loadingSpinner;
             @Override
             public void onDiscoveryComplete() {
                 if (beans.size() == 0) {
-                    loadingProgressTextView.setText("Failed to find bean");
+                    loadingProgressTextView.setText(R.string.bean_failed);
                 }
 
                 for (final Bean bean : beans) {
@@ -90,7 +85,7 @@ private ProgressBar loadingSpinner;
                     BeanListener beanListener = new BeanListener() {
                         @Override
                         public void onConnected() {
-                            loadingProgressTextView.setText("Initializing Bean...");
+                            loadingProgressTextView.setText(R.string.bean_success);
                             Log.i(TAG, "Connected to Bean!");
                             bean.readDeviceInfo(new Callback<DeviceInfo>() {
                                 @Override
@@ -141,10 +136,6 @@ private ProgressBar loadingSpinner;
                 }
             }
         };
-//        int name = 0;
-//        ActivityCompat.requestPermissions(this,
-//                new String[]{Manifest.permission.ACCESS_COARSE_LOCATION},
-//                name);
         BeanManager bm = BeanManager.getInstance();
         //bm.setScanTimeout(45);
         bm.startDiscovery(listener);
