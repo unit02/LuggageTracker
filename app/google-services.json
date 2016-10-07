@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "485603463285",
+    "firebase_url": "https://luggagetracker-42ab6.firebaseio.com",
+    "project_id": "luggagetracker-42ab6",
+    "storage_bucket": "luggagetracker-42ab6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:485603463285:android:961a1871d9e4dd9f",
+        "android_client_info": {
+          "package_name": "mecs.hci.luggagetracker"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "485603463285-t0np2lsblbscr2jceusp5u2f3113upav.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCJXVk5_-E8_f7jyT1l1A_8-uWSaynEsPI"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
