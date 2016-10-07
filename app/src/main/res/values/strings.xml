@@ -1,6 +1,12 @@
 <resources>
     <string name="app_name">LuggageTracker</string>
     <string name="title_activity_main">MainActivity</string>
+    <string name="facebook_app_id">215958758819681</string>
+    <string name="facebook_status_fmt">Facebook User: %s</string>
+    <string name="facebook_title_text">Facebook Login</string>
+    <string name="sign_in">Sign In</string>
+    <string name="sign_out">Sign Out</string>
+    <string name="signed_out">Signed Out</string>
     <string name="title_activity_login">Sign in</string>
     <string name="action_settings">Settings</string>
 
