@@ -1,9 +1,8 @@
-package sensors;
+package mecs.hci.luggagetracker.sensors;
 
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.punchthrough.bean.sdk.Bean;
+import com.punchthrough.bean.sdk.message.Acceleration;
 import com.punchthrough.bean.sdk.message.Callback;
 
 import java.util.Timer;
@@ -20,23 +20,25 @@ import mecs.hci.luggagetracker.CurrentBean;
 import mecs.hci.luggagetracker.R;
 
 
-public class TemperatureFragment extends Fragment {
+public class AccelerometerFragment extends Fragment {
 
-    public static String TAG = "TemperatureFragment";
+    public static String TAG = "AccelerometerFragment";
 
     Bean bean;
 
-    private TextView temperatureTextView;
+    private TextView  XTextView;
+    private TextView  YTextView;
+    private TextView  ZTextView;
 
     private Timer timer;
 
-    public TemperatureFragment() {
+    public AccelerometerFragment() {
         // Required empty public constructor
     }
 
 
-    public static TemperatureFragment newInstance(String param1, String param2) {
-        TemperatureFragment fragment = new TemperatureFragment();
+    public static AccelerometerFragment newInstance(String param1, String param2) {
+        AccelerometerFragment fragment = new AccelerometerFragment();
         return fragment;
     }
 
@@ -50,15 +52,17 @@ public class TemperatureFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View rootView = inflater.inflate(R.layout.fragment_temperature, container, false);
-        temperatureTextView = (TextView)rootView.findViewById(R.id.currentTempTextView);
+        View rootView = inflater.inflate(R.layout.fragment_accelerometer, container, false);
+        XTextView = (TextView)rootView.findViewById(R.id.xAxisAccelerationTextView);
+        YTextView = (TextView)rootView.findViewById(R.id.yAxisAccelerationTextView);
+        ZTextView = (TextView)rootView.findViewById(R.id.zAxisAccelerationTextView);
 
         bean = CurrentBean.getBean();
 
         if (bean != null) {
-            startMonitoringTemperature();
+            startMonitoringAccelerometer();
         } else {
-            Toast.makeText(getActivity(), "Bean not connected",
+            Toast.makeText(getActivity(), "Bean not connected, sensor data will not work",
                     Toast.LENGTH_LONG).show();
         }
 
@@ -76,18 +80,19 @@ public class TemperatureFragment extends Fragment {
         super.onDetach();
     }
 
-    private void startMonitoringTemperature(){
+    private void startMonitoringAccelerometer(){
         timer = new Timer();
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
-                bean.readTemperature(new Callback<Integer>() {
+                bean.readAcceleration(new Callback<Acceleration>() {
                     @Override
-                    public void onResult(final Integer result) {
-                        Log.d(TAG, "Current Temperature is: " + Integer.toString(result));
+                    public void onResult(final Acceleration result) {
                         getActivity().runOnUiThread(new Runnable() {
                             public void run() {
-                              temperatureTextView.setText(Integer.toString(result));
+                                XTextView.setText(Double.toString(result.x()));
+                                YTextView.setText(Double.toString(result.y()));
+                                ZTextView.setText(Double.toString(result.z()));
                             }
                         });
                     }
@@ -98,10 +103,9 @@ public class TemperatureFragment extends Fragment {
 
     @Override
     public void onPause() {
-        if (timer != null) {
+        if (timer !=  null) {
             timer.cancel();
         }
         super.onPause();
     }
-
 }

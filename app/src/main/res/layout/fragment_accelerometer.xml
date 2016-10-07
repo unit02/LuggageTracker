@@ -14,38 +14,42 @@
         android:layout_marginTop="42dp"
         android:id="@+id/textView" />
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_centerVertical="true"
+        android:layout_alignParentStart="true"
+        android:gravity="center_horizontal"
+        >
     <TextView
         android:text="Current acceleration: "
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/currentaccelerometerTitleTextView"
-        android:layout_centerVertical="true"
-        android:layout_alignParentStart="true" />
+        />
 
     <TextView
         android:text="TextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/xAxisAccelerationTextView"
-        android:layout_alignBaseline="@+id/currentaccelerometerTitleTextView"
-        android:layout_alignBottom="@+id/currentaccelerometerTitleTextView"
-        android:layout_toEndOf="@+id/currentaccelerometerTitleTextView" />
+        />
 
     <TextView
         android:text="TextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/yAxisAccelerationTextView"
-        android:layout_centerVertical="true"
-        android:layout_toEndOf="@+id/xAxisAccelerationTextView" />
+        />
     
     <TextView
         android:text="TextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/zAxisAccelerationTextView"
-        android:layout_centerVertical="true"
-        android:layout_toEndOf="@+id/yAxisAccelerationTextView" />
+        />
+    </LinearLayout>
 
 
 </RelativeLayout>

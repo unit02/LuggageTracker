@@ -29,6 +29,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import mecs.hci.luggagetracker.ConnectionActivity;
@@ -60,12 +61,14 @@ public class LoginActivity extends AppCompatActivity {
         View decorView = getWindow().getDecorView();
         int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN;
         decorView.setSystemUiVisibility(uiOptions);
+        mDatabase = FirebaseDatabase.getInstance().getReference();
 
 
         mAuth = FirebaseAuth.getInstance();
         if (mAuth.getCurrentUser() != null) {
-            startActivity(new Intent(this, ConnectionActivity.class));
-            finish();
+            FirebaseUser user = mAuth.getCurrentUser();
+            goToApplication(user);
+
         }
 
         mTitleText = (TextView) findViewById(R.id.luggage_title);
@@ -76,14 +79,15 @@ public class LoginActivity extends AppCompatActivity {
 
 
 
-
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
                     Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
-                    goToApplication();
+                    goToApplication(user);
+
+
                 } else {
                     Log.d(TAG, "onAuthStateChanged:signed_out");
                 }
@@ -188,8 +192,9 @@ public class LoginActivity extends AppCompatActivity {
 
 
     // On authentication, push a new user to the database
-    private void writeNewUser() {
-        mDatabase.child("users").child(mAuth.getCurrentUser().getUid()).addValueEventListener(
+    private void writeNewUser(FirebaseUser user) {
+        Log.d("CJ", user.getUid());
+        mDatabase.child("users").child(user.getUid().toString()).addValueEventListener(
                 new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
@@ -210,8 +215,9 @@ public class LoginActivity extends AppCompatActivity {
     }
 
 
-    private void goToApplication() {
+    private void goToApplication(FirebaseUser user) {
         startActivity(new Intent(this, ConnectionActivity.class));
+        writeNewUser(user);
         finish();
     }
 

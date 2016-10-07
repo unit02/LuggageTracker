@@ -9,19 +9,21 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="mecs.hci.luggagetracker.ConnectionActivity"
-    android:background="#DDE9F0">
+    android:background="@color/white">
 
     <Button
-        android:text="moveToSensorView"
+        android:text="Continue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/moveToSensorViewButton"
         android:onClick="moveToSensorView"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="11dp" />
+        android:theme="@style/ThemeOverlay.LuggageButton"
+        android:layout_marginBottom="20dp" />
 
-    <ProgressBar android:id="@+id/loadingSpinner"
+    <ProgressBar
+        android:id="@+id/loadingSpinner"
         style="?android:progressBarStyleLarge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -31,11 +33,12 @@
         android:layout_centerHorizontal="true" />
 
     <TextView
-        android:text="Searching for Bean.."
+        android:text="Searching for Bean..."
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
         android:id="@+id/loadingTextView"
-        android:layout_below="@+id/loadingSpinner"
+        android:layout_marginBottom="43dp"
+        android:textSize="24sp"
+        android:layout_above="@+id/loadingSpinner"
         android:layout_centerHorizontal="true" />
 </RelativeLayout>

@@ -4,10 +4,10 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
-import sensors.AccelerometerFragment;
-import sensors.LightFragment;
-import sensors.LocationFragment;
-import sensors.TemperatureFragment;
+import mecs.hci.luggagetracker.sensors.AccelerometerFragment;
+import mecs.hci.luggagetracker.sensors.LightFragment;
+import mecs.hci.luggagetracker.sensors.LocationFragment;
+import mecs.hci.luggagetracker.sensors.TemperatureFragment;
 
 
 public class ViewPagerAdapter extends FragmentStatePagerAdapter {

@@ -1,4 +1,4 @@
-package sensors;
+package mecs.hci.luggagetracker.sensors;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -8,12 +8,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.punchthrough.bean.sdk.Bean;
-
 import java.util.Timer;
 import java.util.TimerTask;
 
-import mecs.hci.luggagetracker.CurrentBean;
 import mecs.hci.luggagetracker.R;
 
 
