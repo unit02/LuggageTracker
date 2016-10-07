@@ -41,6 +41,13 @@ private ProgressBar loadingSpinner;
         bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         loadingSpinner = (ProgressBar) findViewById(R.id.loadingSpinner);
 
+        // Hide the status bar.
+        View decorView = getWindow().getDecorView();
+        int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN;
+        decorView.setSystemUiVisibility(uiOptions);
+
+
+
         //TODO after 45 seconds restart activity
         //TODO make it so that the listner is set up once bluetooth is on
 //        if (!bluetoothAdapter.isEnabled())
@@ -142,5 +149,18 @@ private ProgressBar loadingSpinner;
         //bm.setScanTimeout(45);
         bm.startDiscovery(listener);
     }
+
+
+    @Override
+    public void onResume() {
+        super.onResume();  // Always call the superclass method first
+
+        View decorView = getWindow().getDecorView();
+        // Hide the status bar.
+        int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN;
+        decorView.setSystemUiVisibility(uiOptions);
+    }
+
+
 
 }
