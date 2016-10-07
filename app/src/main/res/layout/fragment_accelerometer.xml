@@ -5,29 +5,47 @@
     tools:context="mecs.hci.luggagetracker.sensors.AccelerometerFragment">
 
     <TextView
+        android:text="Accelerometer"
+        android:textSize="30dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="42dp"
+        android:id="@+id/textView" />
+
+    <TextView
         android:text="Current acceleration: "
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/currentaccelerometerTitleTextView"
-        />
+        android:layout_centerVertical="true"
+        android:layout_alignParentStart="true" />
+
     <TextView
         android:text="TextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/xAxisAccelerationTextView"
-        android:layout_toRightOf="@id/currentaccelerometerTitleTextView"/>
+        android:layout_alignBaseline="@+id/currentaccelerometerTitleTextView"
+        android:layout_alignBottom="@+id/currentaccelerometerTitleTextView"
+        android:layout_toEndOf="@+id/currentaccelerometerTitleTextView" />
+
     <TextView
         android:text="TextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/yAxisAccelerationTextView"
-        android:layout_toRightOf="@id/xAxisAccelerationTextView"/>
+        android:layout_centerVertical="true"
+        android:layout_toEndOf="@+id/xAxisAccelerationTextView" />
+    
     <TextView
         android:text="TextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/zAxisAccelerationTextView"
-        android:layout_toRightOf="@id/yAxisAccelerationTextView"/>
+        android:layout_centerVertical="true"
+        android:layout_toEndOf="@+id/yAxisAccelerationTextView" />
 
 
 </RelativeLayout>

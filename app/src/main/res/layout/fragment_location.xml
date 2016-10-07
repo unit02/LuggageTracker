@@ -5,17 +5,30 @@
     tools:context="mecs.hci.luggagetracker.sensors.LocationFragment">
 
     <TextView
+        android:text="Location"
+        android:textSize="30dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="42dp"
+        android:id="@+id/textView" />
+
+    <TextView
         android:text="Current Location:"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/currentLocationTitleTextView"
-        />
+        android:layout_centerVertical="true"
+        android:layout_toStartOf="@+id/textView" />
+
     <TextView
         android:text="TextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/currentcurrentLocationTitleTextViewTextView"
-        android:layout_toRightOf="@id/currentLocationTitleTextView"/>
+        android:layout_centerVertical="true"
+        android:layout_toEndOf="@+id/textView" />
 
 
 </RelativeLayout>
