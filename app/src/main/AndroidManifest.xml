@@ -19,7 +19,7 @@
             android:name=".SensorViewActivity"
             android:label="@string/title_activity_main"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".LoginActivity">
+        <activity android:name=".Auth.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

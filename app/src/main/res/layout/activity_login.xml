@@ -64,6 +64,7 @@
             android:text="continue to application"
             android:theme="@style/ThemeOverlay.FacebookLogoutButton"
             android:visibility="gone"
+            android:layout_below="@id/button_facebook_signout"
             android:id="@+id/button_go_to_application"
             android:onClick="goToApplication"/>
 

@@ -30,9 +30,10 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 
-import mecs.hci.luggagetracker.MainActivity;
+import mecs.hci.luggagetracker.ConnectionActivity;
 import mecs.hci.luggagetracker.Models.User;
 import mecs.hci.luggagetracker.R;
+import mecs.hci.luggagetracker.SensorViewActivity;
 
 public class LoginActivity extends AppCompatActivity implements
         View.OnClickListener {
@@ -58,7 +59,7 @@ public class LoginActivity extends AppCompatActivity implements
 
         mAuth = FirebaseAuth.getInstance();
         if (mAuth.getCurrentUser() != null) {
-            startActivity(new Intent(this, MainActivity.class));
+            startActivity(new Intent(this, ConnectionActivity.class));
             finish();
         }
 
@@ -79,7 +80,7 @@ public class LoginActivity extends AppCompatActivity implements
                 } else {
                     Log.d(TAG, "onAuthStateChanged:signed_out");
                 }
-                updateUI(null);
+                updateUI(user);
             }
         };
 
@@ -169,7 +170,6 @@ public class LoginActivity extends AppCompatActivity implements
 
     private void updateUI(FirebaseUser user) {
         if (user != null) {
-
             mStatus.setText("ID: " + user.getUid().toString());
             findViewById(R.id.button_facebook_login).setVisibility(View.GONE);
             findViewById(R.id.button_facebook_signout).setVisibility(View.VISIBLE);
@@ -186,7 +186,7 @@ public class LoginActivity extends AppCompatActivity implements
 
 
     public void goToApplication(View view) {
-        startActivity(new Intent(this, MainActivity.class));
+        startActivity(new Intent(this, ConnectionActivity.class));
         finish();
     }
 
@@ -215,7 +215,7 @@ public class LoginActivity extends AppCompatActivity implements
 
 
     private void goToNewUser() {
-        startActivity(new Intent(this, MainActivity.class));
+        startActivity(new Intent(this, SensorViewActivity.class));
         finish();
     }
 
