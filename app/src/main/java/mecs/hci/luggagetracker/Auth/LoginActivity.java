@@ -1,5 +1,6 @@
 package mecs.hci.luggagetracker.Auth;
 
+import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.content.Intent;
@@ -43,7 +44,9 @@ public class LoginActivity extends AppCompatActivity implements
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
     private DatabaseReference mDatabase;
-    private TextView mStatus;
+    private TextView mTitleText;
+    private TextView mTitleText2;
+
 
     private CallbackManager mCallbackManager;
 
@@ -55,7 +58,11 @@ public class LoginActivity extends AppCompatActivity implements
 
         findViewById(R.id.button_facebook_signout).setOnClickListener(this);
 
-        mAuth = FirebaseAuth.getInstance();
+        // Hide the status bar.
+        View decorView = getWindow().getDecorView();
+        int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN;
+        decorView.setSystemUiVisibility(uiOptions);
+
 
         mAuth = FirebaseAuth.getInstance();
         if (mAuth.getCurrentUser() != null) {
@@ -63,7 +70,12 @@ public class LoginActivity extends AppCompatActivity implements
             finish();
         }
 
-        mStatus = (TextView) findViewById(R.id.status);
+        mTitleText = (TextView) findViewById(R.id.luggage_title);
+        mTitleText2 = (TextView) findViewById(R.id.luggage_title2);
+        Typeface custom_font = Typeface.createFromAsset(getAssets(),  "fonts/Montserrat-Regular.otf");
+        mTitleText.setTypeface(custom_font);
+        mTitleText2.setTypeface(custom_font);
+
 
 
 
@@ -170,13 +182,10 @@ public class LoginActivity extends AppCompatActivity implements
 
     private void updateUI(FirebaseUser user) {
         if (user != null) {
-            mStatus.setText("ID: " + user.getUid().toString());
             findViewById(R.id.button_facebook_login).setVisibility(View.GONE);
             findViewById(R.id.button_facebook_signout).setVisibility(View.VISIBLE);
             findViewById(R.id.button_go_to_application).setVisibility(View.VISIBLE);
         } else {
-            mStatus.setText("Nothing");
-
             findViewById(R.id.button_facebook_login).setVisibility(View.VISIBLE);
             findViewById(R.id.button_facebook_signout).setVisibility(View.GONE);
             findViewById(R.id.button_go_to_application).setVisibility(View.GONE);
@@ -229,4 +238,16 @@ public class LoginActivity extends AppCompatActivity implements
             signOut();
         }
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();  // Always call the superclass method first
+
+        View decorView = getWindow().getDecorView();
+        // Hide the status bar.
+        int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN;
+        decorView.setSystemUiVisibility(uiOptions);
+    }
+
+
 }

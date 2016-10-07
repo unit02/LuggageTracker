@@ -1,74 +1,95 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main_layout"
-    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimary"
-    android:orientation="vertical"
-    android:weightSum="4">
+    android:layout_width="match_parent"
+    >
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/luggagebg2"
+        android:scaleType="centerCrop"/>
 
     <LinearLayout
+        android:id="@+id/main_layout"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="3"
-        android:gravity="center_horizontal"
-        android:orientation="vertical">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:weightSum="4">
 
-        <TextView
-            android:id="@+id/title_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/title_bottom_margin" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="3"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
 
-        <TextView
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:id="@+id/status"
-            android:textColor="@color/white"
-            android:text="@string/signed_out" />
+            <ImageView
+                android:layout_width="170dp"
+                android:layout_height="170dp"
+                android:id="@+id/luggage_logo"
+                android:layout_gravity="center"
+                android:src="@drawable/luggage_logo"
+                android:layout_marginTop="100dp"
+                />
 
-        <TextView
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:id="@+id/detail"
-            android:textColor="@color/white"
-            tools:text="Firebase User ID: 123456789abc" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/luggage_title"
+                android:text="LUGGAGE"
+                android:layout_gravity="center"
+                android:textColor="@color/white"
+                android:textSize="35sp"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/luggage_title2"
+                android:layout_gravity="center"
+                android:textColor="@color/white"
+                android:textSize="35sp"
+                android:text="TRACKER"/>
+
+            <com.facebook.login.widget.LoginButton
+                android:id="@+id/button_facebook_login"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="40dp"
+                />
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+
+
+            <Button
+                android:id="@+id/button_facebook_signout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:theme="@style/ThemeOverlay.FacebookLogoutButton"
+                android:text="@string/sign_out"
+                android:visibility="gone"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="continue to application"
+                android:theme="@style/ThemeOverlay.FacebookLogoutButton"
+                android:visibility="gone"
+                android:layout_below="@id/button_facebook_signout"
+                android:id="@+id/button_go_to_application"
+                android:onClick="goToApplication"/>
+
+
+        </RelativeLayout>
 
     </LinearLayout>
-
-    <RelativeLayout
-        android:layout_width="fill_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:background="@color/colorPrimary">
-
-        <com.facebook.login.widget.LoginButton
-            android:id="@+id/button_facebook_login"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true" />
-
-        <Button
-            android:id="@+id/button_facebook_signout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:theme="@style/ThemeOverlay.FacebookLogoutButton"
-            android:text="@string/sign_out"
-            android:visibility="gone"/>
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="continue to application"
-            android:theme="@style/ThemeOverlay.FacebookLogoutButton"
-            android:visibility="gone"
-            android:layout_below="@id/button_facebook_signout"
-            android:id="@+id/button_go_to_application"
-            android:onClick="goToApplication"/>
-
-
-    </RelativeLayout>
-
-</LinearLayout>
+</FrameLayout>
