@@ -1,5 +1,6 @@
 package mecs.hci.luggagetracker.sensors;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -58,6 +59,11 @@ public class LocationFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+        Activity a;
+        if (context instanceof Activity) {
+            a = (Activity) context;
+        }
+
     }
 
     @Override

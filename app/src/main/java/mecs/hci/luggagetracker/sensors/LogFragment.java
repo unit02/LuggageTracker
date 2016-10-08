@@ -1,7 +1,7 @@
 package mecs.hci.luggagetracker.sensors;
 
+import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -11,15 +11,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.util.Log;
+
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 
-import mecs.hci.luggagetracker.Models.Log;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
+import mecs.hci.luggagetracker.Models.Event;
 import mecs.hci.luggagetracker.Models.Type;
 import mecs.hci.luggagetracker.R;
 
@@ -45,7 +50,7 @@ public class LogFragment extends Fragment {
 
     private RecyclerView mRecyclerView;
     private RecyclerView.LayoutManager mLayoutManager;
-    private FirebaseRecyclerAdapter<Log, LogHolder> mRecyclerViewAdapter;
+    private FirebaseRecyclerAdapter<Event, LogHolder> mRecyclerViewAdapter;
 
     private RecyclerView.Adapter mAdapter;
 
@@ -97,6 +102,8 @@ public class LogFragment extends Fragment {
         mRecyclerView.setLayoutManager(mLayoutManager);
         mAuth = FirebaseAuth.getInstance();
 
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        Log.d("CJ", sdf.format(new Date()));
 
         mRef = FirebaseDatabase.getInstance().getReference();
         mRef.keepSynced(true);
@@ -116,21 +123,20 @@ public class LogFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
+        Activity a;
+        if (context instanceof Activity) {
+            a = (Activity) context;
         }
+
     }
 
     private void attachRecyclerViewAdapter() {
         Query lastFifty = mLogRef.limitToLast(50);
-        mRecyclerViewAdapter = new FirebaseRecyclerAdapter<Log, LogHolder>(
-                Log.class, R.layout.cardlayout_log, LogHolder.class, lastFifty) {
+        mRecyclerViewAdapter = new FirebaseRecyclerAdapter<Event, LogHolder>(
+                Event.class, R.layout.cardlayout_log, LogHolder.class, lastFifty) {
 
             @Override
-            public void populateViewHolder(LogHolder logView, final Log log, int position) {
+            public void populateViewHolder(LogHolder logView, final Event log, int position) {
                 logView.setTime(log.getTime());
                 logView.setType(log.getType());
 

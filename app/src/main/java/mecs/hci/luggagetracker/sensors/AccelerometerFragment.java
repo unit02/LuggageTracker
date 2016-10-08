@@ -17,6 +17,8 @@ import com.punchthrough.bean.sdk.Bean;
 import com.punchthrough.bean.sdk.message.Acceleration;
 import com.punchthrough.bean.sdk.message.Callback;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -38,6 +40,7 @@ public class AccelerometerFragment extends Fragment {
     private DatabaseReference mDatabase;
 
     private Timer timer;
+    private List<TriggerListener> listeners = new ArrayList<TriggerListener>();
 
     public AccelerometerFragment() {
         // Required empty public constructor
@@ -73,6 +76,11 @@ public class AccelerometerFragment extends Fragment {
         XTextView.setTypeface(custom_font);
         mTitle.setTypeface(custom_font);
 
+        FirebaseResponder responder = new FirebaseResponder();
+        addListener(responder);
+
+
+
         if (bean != null) {
             startMonitoringAccelerometer();
         } else {
@@ -83,6 +91,9 @@ public class AccelerometerFragment extends Fragment {
         return rootView;
     }
 
+    public void addListener(TriggerListener toAdd) {
+        listeners.add(toAdd);
+    }
 
     @Override
     public void onAttach(Context context) {
