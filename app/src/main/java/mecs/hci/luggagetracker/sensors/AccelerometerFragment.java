@@ -1,6 +1,7 @@
 package mecs.hci.luggagetracker.sensors;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -9,6 +10,9 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.punchthrough.bean.sdk.Bean;
 import com.punchthrough.bean.sdk.message.Acceleration;
 import com.punchthrough.bean.sdk.message.Callback;
@@ -29,6 +33,9 @@ public class AccelerometerFragment extends Fragment {
     private TextView  XTextView;
     private TextView  YTextView;
     private TextView  ZTextView;
+    private TextView mTitle;
+    private FirebaseAuth mAuth;
+    private DatabaseReference mDatabase;
 
     private Timer timer;
 
@@ -56,8 +63,15 @@ public class AccelerometerFragment extends Fragment {
         XTextView = (TextView)rootView.findViewById(R.id.xAxisAccelerationTextView);
         YTextView = (TextView)rootView.findViewById(R.id.yAxisAccelerationTextView);
         ZTextView = (TextView)rootView.findViewById(R.id.zAxisAccelerationTextView);
-
+        mTitle = (TextView) rootView.findViewById(R.id.title);
+        mAuth = FirebaseAuth.getInstance();
+        mDatabase = FirebaseDatabase.getInstance().getReference();
         bean = CurrentBean.getBean();
+        Typeface custom_font = Typeface.createFromAsset(getContext().getAssets(),  "fonts/Montserrat-Regular.otf");
+        ZTextView.setTypeface(custom_font);
+        YTextView.setTypeface(custom_font);
+        XTextView.setTypeface(custom_font);
+        mTitle.setTypeface(custom_font);
 
         if (bean != null) {
             startMonitoringAccelerometer();

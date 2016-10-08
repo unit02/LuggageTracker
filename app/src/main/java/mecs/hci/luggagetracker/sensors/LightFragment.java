@@ -1,6 +1,7 @@
 package mecs.hci.luggagetracker.sensors;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -21,6 +22,7 @@ public class LightFragment extends Fragment {
     public static String TAG = "lightFragment";
 
     private TextView lightTextView;
+    private TextView mTitle;
 
     private Timer timer;
     private Random r;
@@ -46,8 +48,13 @@ public class LightFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         int value = (int) (new Date().getTime()/1000);
+        Typeface custom_font = Typeface.createFromAsset(getContext().getAssets(),  "fonts/Montserrat-Regular.otf");
         View rootView = inflater.inflate(R.layout.fragment_light, container, false);
         lightTextView = (TextView)rootView.findViewById(R.id.currentlightTextView);
+        mTitle = (TextView) rootView.findViewById(R.id.title);
+
+        lightTextView.setTypeface(custom_font);
+        mTitle.setTypeface(custom_font);
 
         r = new Random();
         startMonitoringlight();

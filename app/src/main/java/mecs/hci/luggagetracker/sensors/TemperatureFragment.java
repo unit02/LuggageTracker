@@ -1,6 +1,7 @@
 package mecs.hci.luggagetracker.sensors;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -27,6 +28,7 @@ public class TemperatureFragment extends Fragment {
     Bean bean;
 
     private TextView temperatureTextView;
+    private TextView mTitle;
 
     private Timer timer;
 
@@ -52,6 +54,11 @@ public class TemperatureFragment extends Fragment {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_temperature, container, false);
         temperatureTextView = (TextView)rootView.findViewById(R.id.currentTempTextView);
+        mTitle = (TextView) rootView.findViewById(R.id.title);
+
+        Typeface custom_font = Typeface.createFromAsset(getContext().getAssets(),  "fonts/Montserrat-Regular.otf");
+        temperatureTextView.setTypeface(custom_font);
+        mTitle.setTypeface(custom_font);
 
         bean = CurrentBean.getBean();
 

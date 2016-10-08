@@ -1,6 +1,7 @@
 package mecs.hci.luggagetracker.sensors;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -21,6 +22,8 @@ public class LocationFragment extends Fragment {
     private TextView LocationTextView;
 
     private Timer timer;
+    private TextView mTitle;
+
 
     public LocationFragment() {
         // Required empty public constructor
@@ -41,6 +44,10 @@ public class LocationFragment extends Fragment {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_location, container, false);
         LocationTextView = (TextView)rootView.findViewById(R.id.currentTempTextView);
+        mTitle = (TextView) rootView.findViewById(R.id.title);
+
+        Typeface custom_font = Typeface.createFromAsset(getContext().getAssets(),  "fonts/Montserrat-Regular.otf");
+        mTitle.setTypeface(custom_font);
 
         startMonitoringLocation();
 
