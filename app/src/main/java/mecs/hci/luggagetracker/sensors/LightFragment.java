@@ -1,9 +1,12 @@
 package mecs.hci.luggagetracker.sensors;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -106,8 +109,11 @@ public class LightFragment extends Fragment {
                         int lightIntensity = r.nextInt(120 - 75) + 75;
                         lightTextView.setText(lightIntensity + "");
                         // set progress between 250 and 500
-                        progressBar.setProgress((int)((lightIntensity*(250/200.0))+250));
-                        if (lightIntensity > 100) {
+                        progressBar.setProgress(((lightIntensity*(250/120) * 2)));
+
+                        setBarColour(progressBar, lightIntensity);
+
+                        if (lightIntensity > 120) {
                             for (TriggerListener listener : listeners) {
                                     listener.significantEventOccurred(mAuth.getCurrentUser(), Type.LIGHT);
                                 }
@@ -115,7 +121,28 @@ public class LightFragment extends Fragment {
                     }
                 });
             }
-        }, 0, 5000);
+        }, 0, 2000);
+    }
+
+    private void setBarColour(ProgressBar progressBar, int lightIntensity) {
+        Context context = getContext();
+        if (lightIntensity < 80) {
+            progressBar.getProgressDrawable().setColorFilter(ContextCompat.getColor(context, R.color.light_0), PorterDuff.Mode.MULTIPLY);
+        }
+        else if (lightIntensity < 90) {
+            progressBar.getProgressDrawable().setColorFilter(ContextCompat.getColor(context, R.color.light_1), PorterDuff.Mode.MULTIPLY);
+        }
+        else if (lightIntensity < 100) {
+            progressBar.getProgressDrawable().setColorFilter(ContextCompat.getColor(context, R.color.light_2), PorterDuff.Mode.MULTIPLY);
+        }
+        else if (lightIntensity < 110) {
+            progressBar.getProgressDrawable().setColorFilter(ContextCompat.getColor(context, R.color.light_3), PorterDuff.Mode.MULTIPLY);
+        }
+        else {
+            progressBar.getProgressDrawable().setColorFilter(ContextCompat.getColor(context, R.color.light_4), PorterDuff.Mode.MULTIPLY);
+        }
+
+
     }
 
     @Override

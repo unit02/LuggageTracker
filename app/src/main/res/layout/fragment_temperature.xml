@@ -82,7 +82,7 @@
         android:layout_height="300dp"
         android:max="500"
         android:progress="420"
-        android:progressDrawable="@drawable/circle_progress_bar"
+        android:progressDrawable="@drawable/circle_progress_temp"
         android:layout_below="@+id/bar"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="46dp" />
