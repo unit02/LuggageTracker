@@ -52,8 +52,6 @@ public class FirebaseResponder implements TriggerListener {
         //TO-DO
         // PUSH UP ALL THE RELEVANT INFORMATION TO FIREBASE.
 
-
-
     }
 
 }
