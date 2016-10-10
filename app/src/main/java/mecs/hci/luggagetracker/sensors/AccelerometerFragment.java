@@ -34,9 +34,14 @@ public class AccelerometerFragment extends Fragment {
 
     Bean bean;
 
+
+
     private TextView  XTextView;
     private TextView  YTextView;
     private TextView  ZTextView;
+    private TextView mXLabel;
+    private TextView mYLabel;
+    private TextView mZLabel;
     private TextView warningLevel;
     private TextView mTitle;
     private FirebaseAuth mAuth;
@@ -65,26 +70,34 @@ public class AccelerometerFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_accelerometer, container, false);
-        XTextView = (TextView)rootView.findViewById(R.id.xAxisAccelerationTextView);
-        YTextView = (TextView)rootView.findViewById(R.id.yAxisAccelerationTextView);
-        ZTextView = (TextView)rootView.findViewById(R.id.zAxisAccelerationTextView);
+        XTextView = (TextView) rootView.findViewById(R.id.xAxisAccelerationTextView);
+        YTextView = (TextView) rootView.findViewById(R.id.yAxisAccelerationTextView);
+        ZTextView = (TextView) rootView.findViewById(R.id.zAxisAccelerationTextView);
+        mXLabel = (TextView)rootView.findViewById(R.id.xLabel);
+        mYLabel = (TextView)rootView.findViewById(R.id.yLabel);
+        mZLabel = (TextView)rootView.findViewById(R.id.zLabel);
         mTitle = (TextView) rootView.findViewById(R.id.title);
+        warningLevel = (TextView) rootView.findViewById(R.id.warningLevel);
+
+
         mAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference();
-        warningLevel = (TextView)rootView.findViewById(R.id.warningLevel);
 
         bean = CurrentBean.getBean();
+
         Typeface custom_font = Typeface.createFromAsset(getContext().getAssets(),  "fonts/Montserrat-Regular.otf");
+
         ZTextView.setTypeface(custom_font);
         YTextView.setTypeface(custom_font);
         XTextView.setTypeface(custom_font);
+        mXLabel.setTypeface(custom_font);
+        mYLabel.setTypeface(custom_font);
+        mZLabel.setTypeface(custom_font);
         mTitle.setTypeface(custom_font);
-
+        warningLevel.setTypeface(custom_font);
 
         FirebaseResponder responder = new FirebaseResponder();
         addListener(responder);
-
-
 
         if (bean != null) {
             startMonitoringAccelerometer();
@@ -152,9 +165,9 @@ public class AccelerometerFragment extends Fragment {
                         getActivity().runOnUiThread(new Runnable() {
                             public void run() {
                                 warningLevel.setText("BANG!");
-                                for (TriggerListener listener : listeners) {
-                                    listener.significantEventOccurred(mAuth.getCurrentUser(), Type.ACCELEROMETER);
-                                }
+//                                for (TriggerListener listener : listeners) {
+//                                    listener.significantEventOccurred(mAuth.getCurrentUser(), Type.MOTION);
+//                                }
                             }
                         });
                     } else if (accelerometerMoving(result, previousAccel)) {

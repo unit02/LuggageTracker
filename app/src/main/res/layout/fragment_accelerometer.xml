@@ -7,7 +7,8 @@
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:background="@color/colorPrimary"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:id="@+id/bar">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -41,56 +42,105 @@
         android:layout_centerVertical="true"
         android:layout_alignParentStart="true"
         android:gravity="center_horizontal"
+        android:id="@+id/values"
+        android:layout_below="@id/bar"
+        android:layout_marginTop="20dp"
         >
-    <TextView
-        android:text="Current acceleration: "
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/currentaccelerometerTitleTextView"
-        android:layout_marginTop="17dp"
-        />
-
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginBottom="20dp">
+            android:padding="15dp"
+            android:gravity="center"
+            >
 
+            <TextView
+                android:text="X"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/xLabel"
+                android:textSize="20sp"
+                />
             <TextView
                 android:text="TextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/xAxisAccelerationTextView"
+                android:textSize="20sp"
                 />
 
+
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="15dp"
+            android:gravity="center"
+
+            >
+            <TextView
+                android:text="Y"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/yLabel"
+                android:textSize="20sp"
+                />
             <TextView
                 android:text="TextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/yAxisAccelerationTextView"
+                android:textSize="20sp"
                 />
+
+
+
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="15dp"
+            android:gravity="center"
+
+            >
+
+            <TextView
+                android:text="Z"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/zLabel"
+                android:textSize="20sp"
+                />
+
 
             <TextView
                 android:text="TextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/zAxisAccelerationTextView"
+                android:textSize="20sp"
                 />
-
-
-            <TextView
-                android:text="No problems"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/xAxisAccelerationTextView"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="97dp"
-                android:id="@+id/warningLevel" />
 
 
 
         </LinearLayout>
     </LinearLayout>
+
+
+    <TextView
+        android:text="No problems"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/values"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:id="@+id/warningLevel" />
 
 
 

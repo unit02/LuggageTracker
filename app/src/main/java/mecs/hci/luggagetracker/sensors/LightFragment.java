@@ -9,11 +9,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import mecs.hci.luggagetracker.Models.Type;
 import mecs.hci.luggagetracker.R;
 
 
@@ -26,6 +31,9 @@ public class LightFragment extends Fragment {
     private TextView mLuxText;
     private Timer timer;
     private Random r;
+    private FirebaseAuth mAuth;
+    private List<TriggerListener> listeners = new ArrayList<TriggerListener>();
+
 
     public LightFragment() {
         // Required empty public constructor
@@ -56,12 +64,20 @@ public class LightFragment extends Fragment {
         lightTextView.setTypeface(custom_font);
         mTitle.setTypeface(custom_font);
         mLuxText.setTypeface(custom_font);
+
+        mAuth = FirebaseAuth.getInstance();
+        FirebaseResponder responder = new FirebaseResponder();
+        addListener(responder);
         r = new Random();
         startMonitoringlight();
+
 
         return rootView;
     }
 
+    public void addListener(TriggerListener toAdd) {
+        listeners.add(toAdd);
+    }
 
     @Override
     public void onAttach(Context context) {
@@ -83,13 +99,17 @@ public class LightFragment extends Fragment {
                 getActivity().runOnUiThread(new Runnable() {
                     public void run() {
                         // randomly changing numbers
-                        int lightIntensity = r.nextInt(80 - 75) + 75;
+                        int lightIntensity = r.nextInt(120 - 75) + 75;
                         lightTextView.setText(lightIntensity + "");
+                        if (lightIntensity > 100) {
+                            for (TriggerListener listener : listeners) {
+                                    listener.significantEventOccurred(mAuth.getCurrentUser(), Type.LIGHT);
+                                }
+                        }
                     }
                 });
-
             }
-        }, 0, 250);
+        }, 0, 5000);
     }
 
     @Override
