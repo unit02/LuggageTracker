@@ -42,6 +42,8 @@ public class SecurityFragment extends Fragment {
         imageView = (ImageView)rootView.findViewById(R.id.imageView);
         btn = (Button) rootView.findViewById(R.id.securityBtn);
         btn.setOnClickListener(listener);
+        mTitle = (TextView) rootView.findViewById(R.id.title);
+        Typeface custom_font = Typeface.createFromAsset(getContext().getAssets(),  "fonts/Montserrat-Regular.otf");
 
         mTitle.setTypeface(custom_font);
 

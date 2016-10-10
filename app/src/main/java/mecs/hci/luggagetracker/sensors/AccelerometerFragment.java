@@ -72,12 +72,12 @@ public class AccelerometerFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_accelerometer, container, false);
-        XTextView = (TextView) rootView.findViewById(R.id.xAxisAccelerationTextView);
-        YTextView = (TextView) rootView.findViewById(R.id.yAxisAccelerationTextView);
-        ZTextView = (TextView) rootView.findViewById(R.id.zAxisAccelerationTextView);
-        mXLabel = (TextView)rootView.findViewById(R.id.xLabel);
-        mYLabel = (TextView)rootView.findViewById(R.id.yLabel);
-        mZLabel = (TextView)rootView.findViewById(R.id.zLabel);
+//        XTextView = (TextView) rootView.findViewById(R.id.xAxisAccelerationTextView);
+//        YTextView = (TextView) rootView.findViewById(R.id.yAxisAccelerationTextView);
+//        ZTextView = (TextView) rootView.findViewById(R.id.zAxisAccelerationTextView);
+//        mXLabel = (TextView)rootView.findViewById(R.id.xLabel);
+//        mYLabel = (TextView)rootView.findViewById(R.id.yLabel);
+//        mZLabel = (TextView)rootView.findViewById(R.id.zLabel);
         mTitle = (TextView) rootView.findViewById(R.id.title);
         warningLevel = (TextView) rootView.findViewById(R.id.warningLevel);
 
@@ -90,15 +90,15 @@ public class AccelerometerFragment extends Fragment {
         bean = CurrentBean.getBean();
 
         Typeface custom_font = Typeface.createFromAsset(getContext().getAssets(),  "fonts/Montserrat-Regular.otf");
-
-        ZTextView.setTypeface(custom_font);
-        YTextView.setTypeface(custom_font);
-        XTextView.setTypeface(custom_font);
-        mXLabel.setTypeface(custom_font);
-        mYLabel.setTypeface(custom_font);
-        mZLabel.setTypeface(custom_font);
-        mTitle.setTypeface(custom_font);
-        warningLevel.setTypeface(custom_font);
+//
+//        ZTextView.setTypeface(custom_font);
+//        YTextView.setTypeface(custom_font);
+//        XTextView.setTypeface(custom_font);
+//        mXLabel.setTypeface(custom_font);
+//        mYLabel.setTypeface(custom_font);
+//        mZLabel.setTypeface(custom_font);
+//        mTitle.setTypeface(custom_font);
+//        warningLevel.setTypeface(custom_font);
 
         FirebaseResponder responder = new FirebaseResponder();
         addListener(responder);
