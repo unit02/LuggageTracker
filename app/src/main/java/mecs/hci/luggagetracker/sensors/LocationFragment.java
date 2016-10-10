@@ -10,17 +10,27 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
+
 import java.util.Timer;
 import java.util.TimerTask;
 
 import mecs.hci.luggagetracker.R;
 
 
-public class LocationFragment extends Fragment {
+public class LocationFragment extends Fragment implements OnMapReadyCallback  {
 
     public static String TAG = "LocationFragment";
 
     private TextView LocationTextView;
+    private GoogleMap mMap;
+
 
     private Timer timer;
     private TextView mTitle;
@@ -44,13 +54,17 @@ public class LocationFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_location, container, false);
-        LocationTextView = (TextView)rootView.findViewById(R.id.currentTempTextView);
         mTitle = (TextView) rootView.findViewById(R.id.title);
 
         Typeface custom_font = Typeface.createFromAsset(getContext().getAssets(),  "fonts/Montserrat-Regular.otf");
         mTitle.setTypeface(custom_font);
 
         startMonitoringLocation();
+
+
+        SupportMapFragment mapFragment = (SupportMapFragment) this.getChildFragmentManager()
+                .findFragmentById(R.id.lite_map);
+        mapFragment.getMapAsync(this);
 
         return rootView;
     }
@@ -97,5 +111,22 @@ public class LocationFragment extends Fragment {
         startMonitoringLocation();
         super.onResume();
     }
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        mMap = googleMap;
+
+
+        // Example LatLng at Mcdonalds Queen St
+        LatLng luggage = new LatLng(-36.850171, 174.765191);
+        mMap.addMarker(new MarkerOptions().position(luggage)
+                .title("Luggage"));
+
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
+                luggage,
+                15));
+
+    }
+
 
 }

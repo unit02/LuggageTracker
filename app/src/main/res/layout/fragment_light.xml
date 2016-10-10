@@ -9,62 +9,80 @@
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:background="@color/colorPrimary"
-        android:id="@+id/bar">
-        <TextView
-            android:text="LIGHT"
-            android:textStyle="bold"
-            android:textSize="25sp"
-            android:layout_width="wrap_content"
+        android:id="@+id/bar"
+        android:orientation="horizontal">
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:textColor="@color/white"
-            android:gravity="center"
-            android:layout_marginLeft="120dp"
-            android:id="@+id/title" />
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/ic_brightness_medium_white_36dp"
-            android:layout_gravity="center"
-            android:layout_marginLeft="10dp"
-            />
+            android:orientation="horizontal"
+            android:gravity="center_horizontal"
+            >
+
+            <TextView
+                android:text="LIGHT"
+                android:textStyle="bold"
+                android:textSize="25sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:layout_gravity="center"
+                android:id="@+id/title" />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ic_brightness_medium_white_36dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="10dp"
+                />
+        </LinearLayout>
     </LinearLayout>
 
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="40dp"
-        android:layout_marginRight="40dp"
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:max="500"
+        android:progress="420"
+        android:progressDrawable="@drawable/circle_progress_bar"
         android:layout_below="@+id/bar"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="133dp">
-        <TextView
-            android:text="Current Lux: "
-            android:textSize="24sp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="3"
-            android:gravity="center_vertical"
-            android:padding="5dp"
-            android:elevation="2dp"
-            android:layout_margin="3dp"
-            android:background="@drawable/rounded_green"
-            android:id="@+id/currentlightTitleTextView" />
+        android:layout_marginTop="46dp" />
 
-        <TextView
-            android:text="100 lux"
-            android:textSize="20sp"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:padding="5dp"
-            android:elevation="2dp"
-            android:layout_margin="3dp"
-            android:background="@drawable/rounded_blue"
-            android:textColor="@color/white"
-            android:id="@+id/currentlightTextView" />
-    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/cover"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="151dp"
+        android:background="@color/colorBackground"
+        android:layout_alignBottom="@+id/progressBar"
+        android:layout_alignParentStart="true"></LinearLayout>
 
+    <TextView
+        android:text="76"
+        android:textSize="35sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:elevation="2dp"
+        android:id="@+id/currentlightTextView"
+        android:layout_marginBottom="14dp"
+        android:layout_above="@+id/cover"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:text="Current Lux"
+        android:textSize="24sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:padding="5dp"
+        android:elevation="2dp"
+        android:background="@drawable/rounded_main"
+        android:id="@+id/currentlightTitleTextView"
+        android:layout_marginLeft="3dp"
+        android:layout_marginRight="3dp"
+        android:layout_below="@+id/currentlightTextView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="14dp" />
 
 </RelativeLayout>

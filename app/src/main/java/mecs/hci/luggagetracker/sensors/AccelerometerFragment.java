@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,6 +25,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import mecs.hci.luggagetracker.CurrentBean;
+import mecs.hci.luggagetracker.Models.Type;
 import mecs.hci.luggagetracker.R;
 
 
@@ -33,10 +35,16 @@ public class AccelerometerFragment extends Fragment {
 
     Bean bean;
 
+
+
     private TextView  XTextView;
     private TextView  YTextView;
     private TextView  ZTextView;
+    private TextView mXLabel;
+    private TextView mYLabel;
+    private TextView mZLabel;
     private TextView warningLevel;
+    private ImageView imageView;
     private TextView mTitle;
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabase;
@@ -64,31 +72,42 @@ public class AccelerometerFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_accelerometer, container, false);
-        XTextView = (TextView)rootView.findViewById(R.id.xAxisAccelerationTextView);
-        YTextView = (TextView)rootView.findViewById(R.id.yAxisAccelerationTextView);
-        ZTextView = (TextView)rootView.findViewById(R.id.zAxisAccelerationTextView);
+//        XTextView = (TextView) rootView.findViewById(R.id.xAxisAccelerationTextView);
+//        YTextView = (TextView) rootView.findViewById(R.id.yAxisAccelerationTextView);
+//        ZTextView = (TextView) rootView.findViewById(R.id.zAxisAccelerationTextView);
+//        mXLabel = (TextView)rootView.findViewById(R.id.xLabel);
+//        mYLabel = (TextView)rootView.findViewById(R.id.yLabel);
+//        mZLabel = (TextView)rootView.findViewById(R.id.zLabel);
         mTitle = (TextView) rootView.findViewById(R.id.title);
+        warningLevel = (TextView) rootView.findViewById(R.id.warningLevel);
+
+
         mAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference();
         warningLevel = (TextView)rootView.findViewById(R.id.warningLevel);
+        imageView = (ImageView)rootView.findViewById(R.id.luggageImage);
 
         bean = CurrentBean.getBean();
+
         Typeface custom_font = Typeface.createFromAsset(getContext().getAssets(),  "fonts/Montserrat-Regular.otf");
-        ZTextView.setTypeface(custom_font);
-        YTextView.setTypeface(custom_font);
-        XTextView.setTypeface(custom_font);
-        mTitle.setTypeface(custom_font);
+//
+//        ZTextView.setTypeface(custom_font);
+//        YTextView.setTypeface(custom_font);
+//        XTextView.setTypeface(custom_font);
+//        mXLabel.setTypeface(custom_font);
+//        mYLabel.setTypeface(custom_font);
+//        mZLabel.setTypeface(custom_font);
+//        mTitle.setTypeface(custom_font);
+//        warningLevel.setTypeface(custom_font);
 
         FirebaseResponder responder = new FirebaseResponder();
         addListener(responder);
-
-
 
         if (bean != null) {
             startMonitoringAccelerometer();
         } else {
             Toast.makeText(getActivity(), "Bean not connected, sensor data will not work",
-                    Toast.LENGTH_LONG).show();
+                    Toast.LENGTH_SHORT).show();
             startFakeAccelerometer();
         }
 
@@ -124,6 +143,12 @@ public class AccelerometerFragment extends Fragment {
                                 ZTextView.setText(Double.toString(result.z()));
                             }
                         });
+                        // TODO setup this method for when bean actually works
+//                        getActivity().runOnUiThread(new Runnable() {
+//                            public void run() {
+//
+//                            }
+//                        });
                     }
                 });
             }
@@ -150,30 +175,29 @@ public class AccelerometerFragment extends Fragment {
                         getActivity().runOnUiThread(new Runnable() {
                             public void run() {
                                 warningLevel.setText("BANG!");
+                                imageView.setImageResource(R.drawable.luggage_impact);
+//                                for (TriggerListener listener : listeners) {
+//                                    listener.significantEventOccurred(mAuth.getCurrentUser(), Type.MOTION);
+//                                }
                             }
                         });
                     } else if (accelerometerMoving(result, previousAccel)) {
                         getActivity().runOnUiThread(new Runnable() {
                             public void run() {
                                 warningLevel.setText("MOVING");
+                                imageView.setImageResource(R.drawable.walking_with_luggage);
                             }
                         });
                     } else {
                          getActivity().runOnUiThread(new Runnable() {
                             public void run() {
                                 warningLevel.setText("STILL");
+                                imageView.setImageResource(R.drawable.luggage_still);
                             }
                         });
                     }
                 }
                 previousAccel = result;
-                getActivity().runOnUiThread(new Runnable() {
-                    public void run() {
-                        XTextView.setText(String.format(" %.2f ", result.x()));
-                        YTextView.setText(String.format(" %.2f ", result.y()));
-                        ZTextView.setText(String.format(" %.2f ", result.z()));
-                    }
-                });
             }
         }, 0, 750);
     }
@@ -192,17 +216,17 @@ public class AccelerometerFragment extends Fragment {
         if (difference(one.x(), two.x()) > threshold) {
             return true;
         }
-        if (difference(one.y(), two.y()) > threshold) {
+        if (difference(one.y(), two.y()) > threshold*2) {
             return true;
         }
-        if (difference(one.z(), two.z()) > threshold) {
+        if (difference(one.z(), two.z()) > threshold*2) {
             return true;
         }
         return false;
     }
 
     private boolean isKnocked(Acceleration one, Acceleration two) {
-        double threshold = 0.5;
+        double threshold = 0.6;
         return (difference(one.x(), two.x()) > threshold &&
                 difference(one.y(), two.y()) > threshold &&
                 difference(one.z(), two.z()) > threshold);
@@ -225,7 +249,7 @@ public class AccelerometerFragment extends Fragment {
             startMonitoringAccelerometer();
         } else {
             Toast.makeText(getActivity(), "Bean not connected, sensor data will not work",
-                    Toast.LENGTH_LONG).show();
+                    Toast.LENGTH_SHORT).show();
             startFakeAccelerometer();
         }
         super.onResume();

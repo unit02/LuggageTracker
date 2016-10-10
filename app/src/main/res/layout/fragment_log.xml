@@ -15,6 +15,13 @@
             android:layout_height="100dp"
             android:background="@color/colorPrimary"
             android:id="@+id/bar">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:gravity="center_horizontal"
+            >
+
             <TextView
                 android:text="LOG"
                 android:textStyle="bold"
@@ -22,9 +29,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/white"
-                android:layout_marginTop="30dp"
-                android:layout_marginStart="20dp"
+                android:layout_gravity="center"
                 android:id="@+id/title" />
+            <ImageView
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:background="@drawable/ic_history_white_36dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="10dp"
+                />
+        </LinearLayout>
         </LinearLayout>
 
         <android.support.v7.widget.RecyclerView

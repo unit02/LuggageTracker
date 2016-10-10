@@ -1,37 +1,58 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="layout.SecurityFragment">
+    tools:context=".sensors.SecurityFragment">
 
-    <TextView
-        android:text="Security"
-        android:textSize="30dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="42dp"
-        android:id="@+id/textView" />
+    <LinearLayout
+        android:id="@+id/titleBar"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="@color/colorPrimary">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:gravity="center_horizontal"
+            >
+
+            <TextView
+                android:text="SECURITY"
+                android:textStyle="bold"
+                android:textSize="25sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:layout_gravity="center"
+                android:id="@+id/title" />
+            <ImageView
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:background="@drawable/ic_lock_outline_white_36dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="10dp"
+                />
+        </LinearLayout>
+    </LinearLayout>
 
     <Button
-        android:text="Button"
-        android:layout_width="wrap_content"
+        android:text="Alarm OFF"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textView"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="101dp"
-        android:id="@+id/securityBtn" />
+        android:id="@+id/securityBtn"
+        android:layout_marginTop="57dp"
+        android:layout_below="@+id/titleBar"
+        android:layout_centerHorizontal="true" />
 
-    <ProgressBar
-        android:id="@+id/progressBar"
-        style="?android:attr/progressBarStyleHorizontal"
+    <ImageView
         android:layout_width="200dp"
         android:layout_height="200dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:max="500"
-        android:progress="400"
-        android:progressDrawable="@drawable/circle_progress_bar" />
+        app:srcCompat="@drawable/locked_icon"
+        android:id="@+id/imageView"
+        android:layout_below="@+id/securityBtn"
+        android:layout_centerHorizontal="true" />
+
+
 
 </RelativeLayout>

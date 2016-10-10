@@ -8,6 +8,7 @@ import mecs.hci.luggagetracker.sensors.AccelerometerFragment;
 import mecs.hci.luggagetracker.sensors.LightFragment;
 import mecs.hci.luggagetracker.sensors.LocationFragment;
 import mecs.hci.luggagetracker.sensors.LogFragment;
+import mecs.hci.luggagetracker.sensors.SecurityFragment;
 import mecs.hci.luggagetracker.sensors.TemperatureFragment;
 
 
@@ -21,14 +22,16 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
     public Fragment getItem(int position) {
         switch (position){
             case 0:
-                return new AccelerometerFragment();
+                return new SecurityFragment();
             case 1:
-                return new LightFragment();
+                return new AccelerometerFragment();
             case 2:
-                return new TemperatureFragment();
+                return new LightFragment();
             case 3:
-                return new LocationFragment();
+                return new TemperatureFragment();
             case 4:
+                return new LocationFragment();
+            case 5:
                 return new LogFragment();
         }
         return new LightFragment();
@@ -36,7 +39,7 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public int getCount() {
-        return 5;           // As there are only 3 Tabs
+        return 6;           // As there are only 3 Tabs
     }
 
 

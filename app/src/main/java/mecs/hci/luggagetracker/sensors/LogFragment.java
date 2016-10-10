@@ -2,6 +2,7 @@ package mecs.hci.luggagetracker.sensors;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -58,6 +59,8 @@ public class LogFragment extends Fragment {
     private DatabaseReference mRef;
     private DatabaseReference mLogRef;
 
+    private TextView mTitle;
+
     public LogFragment() {
         // Required empty public constructor
     }
@@ -102,6 +105,10 @@ public class LogFragment extends Fragment {
         mRecyclerView.setLayoutManager(mLayoutManager);
         mAuth = FirebaseAuth.getInstance();
 
+        Typeface custom_font = Typeface.createFromAsset(getContext().getAssets(),  "fonts/Montserrat-Regular.otf");
+
+        mTitle = (TextView) view.findViewById(R.id.title);
+        mTitle.setTypeface(custom_font);
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         Log.d("CJ", sdf.format(new Date()));
 
@@ -179,7 +186,6 @@ public class LogFragment extends Fragment {
             field.setText(time);
 
         }
-
 
         // Sets the number of questions in the test into the cards
         public void setType(Type type) {
