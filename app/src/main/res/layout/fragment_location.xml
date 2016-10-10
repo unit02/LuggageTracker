@@ -4,31 +4,42 @@
     android:layout_height="match_parent"
     tools:context="mecs.hci.luggagetracker.sensors.LocationFragment">
 
-    <TextView
-        android:text="Location"
-        android:textSize="30dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="42dp"
-        android:id="@+id/title" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="@color/colorPrimary">
+        <TextView
+            android:text="LOCATION"
+            android:textStyle="bold"
+            android:textSize="25sp"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textColor="@color/white"
+            android:gravity="center"
+            android:layout_marginLeft="100dp"
+            android:id="@+id/title" />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_place_white_36dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
+            />
+    </LinearLayout>
 
     <TextView
         android:text="Current Location:"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/currentLocationTitleTextView"
-        android:layout_centerVertical="true"
-        android:layout_toStartOf="@+id/title" />
+        android:layout_centerVertical="true" />
 
     <TextView
         android:text="TextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/currentcurrentLocationTitleTextViewTextView"
-        android:layout_centerVertical="true"
-        android:layout_toEndOf="@+id/textView" />
+        android:layout_centerVertical="true" />
 
 
 </RelativeLayout>

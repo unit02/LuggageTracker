@@ -5,6 +5,9 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+
+import com.google.firebase.database.FirebaseDatabase;
 
 public class SensorViewActivity extends AppCompatActivity {
 
@@ -13,20 +16,18 @@ public class SensorViewActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sensors);
 
+        // Hide the status bar.
+        View decorView = getWindow().getDecorView();
+        int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN;
+        decorView.setSystemUiVisibility(uiOptions);
 
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
+
         ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
 
         // Setup viewpageradapter
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
         viewPager.setAdapter(viewPagerAdapter);
 
-        // Creating the tabs
-        final TabLayout.Tab accelerometerTab = tabLayout.newTab();
-        final TabLayout.Tab lightTab = tabLayout.newTab();
-        final TabLayout.Tab temperatureTab = tabLayout.newTab();
-        final TabLayout.Tab locationTab = tabLayout.newTab();
-        final TabLayout.Tab logTab = tabLayout.newTab();
 
         // Setting the title of the tabs
 //        accelerometerTab.setText("Accelerometer");
@@ -34,28 +35,20 @@ public class SensorViewActivity extends AppCompatActivity {
 //        temperatureTab.setText("Temp");
 //        locationTab.setText("Location");
 
-        // setting the icons for tabs
-        accelerometerTab.setIcon(R.drawable.icon_impact);
-        lightTab.setIcon(R.drawable.icon_light);
-        temperatureTab.setIcon(R.drawable.icon_temperature);
-        locationTab.setIcon(R.drawable.icon_location);
-        logTab.setIcon(R.drawable.icon_impact);
-
-        // Add the tabs to the layout
-        tabLayout.addTab(accelerometerTab, 0);
-        tabLayout.addTab(lightTab, 1);
-        tabLayout.addTab(temperatureTab, 2);
-        tabLayout.addTab(locationTab, 3);
-        tabLayout.addTab(logTab, 4);
-
-        // Setup tab colours
-        tabLayout.setTabTextColors(ContextCompat.getColorStateList(this, R.color.white));
-        tabLayout.setBackgroundColor(ContextCompat.getColor(this, R.color.tab_default));
-        tabLayout.setSelectedTabIndicatorColor(ContextCompat.getColor(this, R.color.tab_indicator));
-
-        // setting up the tabs to chage when the viewpager changes
-        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
 
     }
+
+
+    @Override
+    public void onResume() {
+        super.onResume();  // Always call the superclass method first
+
+        View decorView = getWindow().getDecorView();
+        // Hide the status bar.
+        int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN;
+        decorView.setSystemUiVisibility(uiOptions);
+    }
+
+
 
 }

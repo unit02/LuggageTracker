@@ -4,15 +4,25 @@
     android:layout_height="match_parent"
     tools:context="mecs.hci.luggagetracker.sensors.TemperatureFragment">
 
-    <TextView
-        android:text="Temperature"
-        android:textSize="30dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="42dp"
-        android:id="@+id/title" />
+        android:background="@color/colorPrimary"
+        android:id="@+id/bar">
+
+        <TextView
+            android:text="TEMP"
+            android:textStyle="bold"
+            android:textSize="25sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:layout_marginTop="30dp"
+            android:layout_marginStart="20dp"
+            android:id="@+id/title" />
+    </LinearLayout>
+
 
     <LinearLayout
         android:orientation="horizontal"
@@ -20,7 +30,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="40dp"
         android:layout_marginRight="40dp"
-        android:layout_below="@+id/title"
+        android:layout_below="@+id/bar"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="133dp">
         <TextView
