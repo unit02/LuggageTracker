@@ -4,10 +4,11 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
-import sensors.AccelerometerFragment;
-import sensors.LightFragment;
-import sensors.LocationFragment;
-import sensors.TemperatureFragment;
+import mecs.hci.luggagetracker.sensors.AccelerometerFragment;
+import mecs.hci.luggagetracker.sensors.LightFragment;
+import mecs.hci.luggagetracker.sensors.LocationFragment;
+import mecs.hci.luggagetracker.sensors.LogFragment;
+import mecs.hci.luggagetracker.sensors.TemperatureFragment;
 
 
 public class ViewPagerAdapter extends FragmentStatePagerAdapter {
@@ -27,13 +28,15 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
                 return new TemperatureFragment();
             case 3:
                 return new LocationFragment();
+            case 4:
+                return new LogFragment();
         }
         return new LightFragment();
     }
 
     @Override
     public int getCount() {
-        return 4;           // As there are only 3 Tabs
+        return 5;           // As there are only 3 Tabs
     }
 
 

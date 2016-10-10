@@ -3,49 +3,78 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="mecs.hci.luggagetracker.sensors.AccelerometerFragment">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="@color/colorPrimary">
+        <TextView
+            android:text="ACCELEROMETER"
+            android:textStyle="bold"
+            android:textSize="25sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:layout_marginTop="30dp"
+            android:layout_marginStart="20dp"
+            android:id="@+id/title" />
+    </LinearLayout>
 
-    <TextView
-        android:text="Accelerometer"
-        android:textSize="30dp"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="42dp"
-        android:id="@+id/textView" />
-
+        android:orientation="horizontal"
+        android:layout_centerVertical="true"
+        android:layout_alignParentStart="true"
+        android:gravity="center_horizontal"
+        >
     <TextView
         android:text="Current acceleration: "
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/currentaccelerometerTitleTextView"
-        android:layout_centerVertical="true"
-        android:layout_alignParentStart="true" />
+        android:layout_marginTop="17dp"
+        />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginBottom="20dp">
+
+            <TextView
+                android:text="TextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/xAxisAccelerationTextView"
+                />
+
+            <TextView
+                android:text="TextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/yAxisAccelerationTextView"
+                />
+
+            <TextView
+                android:text="TextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/zAxisAccelerationTextView"
+                />
+
+
+
+        </LinearLayout>
+    </LinearLayout>
 
     <TextView
-        android:text="TextView"
+        android:text="No problems"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/xAxisAccelerationTextView"
-        android:layout_alignBaseline="@+id/currentaccelerometerTitleTextView"
-        android:layout_alignBottom="@+id/currentaccelerometerTitleTextView"
-        android:layout_toEndOf="@+id/currentaccelerometerTitleTextView" />
-
-    <TextView
-        android:text="TextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/yAxisAccelerationTextView"
-        android:layout_centerVertical="true"
-        android:layout_toEndOf="@+id/xAxisAccelerationTextView" />
-    
-    <TextView
-        android:text="TextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/zAxisAccelerationTextView"
-        android:layout_centerVertical="true"
-        android:layout_toEndOf="@+id/yAxisAccelerationTextView" />
+        android:layout_below="@+id/xAxisAccelerationTextView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="97dp"
+        android:id="@+id/warningLevel" />
 
 
 </RelativeLayout>

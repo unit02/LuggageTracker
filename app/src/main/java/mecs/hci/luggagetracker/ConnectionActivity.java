@@ -2,6 +2,7 @@ package mecs.hci.luggagetracker;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -35,6 +36,15 @@ public class ConnectionActivity extends AppCompatActivity {
         loadingProgressTextView = (TextView) findViewById(R.id.loadingTextView) ;
 //        bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
 //        loadingSpinner = (ProgressBar) findViewById(R.id.loadingSpinner);
+
+        // Hide the status bar.
+        View decorView = getWindow().getDecorView();
+        int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN;
+        decorView.setSystemUiVisibility(uiOptions);
+
+        Typeface custom_font = Typeface.createFromAsset(getAssets(),  "fonts/Montserrat-Regular.otf");
+        loadingProgressTextView.setTypeface(custom_font);
+
 
         //TODO after 45 seconds restart activity
         //TODO make it so that the listner is set up once bluetooth is on
@@ -133,5 +143,18 @@ public class ConnectionActivity extends AppCompatActivity {
         //bm.setScanTimeout(45);
         bm.startDiscovery(listener);
     }
+
+
+    @Override
+    public void onResume() {
+        super.onResume();  // Always call the superclass method first
+
+        View decorView = getWindow().getDecorView();
+        // Hide the status bar.
+        int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN;
+        decorView.setSystemUiVisibility(uiOptions);
+    }
+
+
 
 }

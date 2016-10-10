@@ -1,6 +1,8 @@
-package sensors;
+package mecs.hci.luggagetracker.sensors;
 
+import android.app.Activity;
 import android.content.Context;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -8,12 +10,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.punchthrough.bean.sdk.Bean;
-
 import java.util.Timer;
 import java.util.TimerTask;
 
-import mecs.hci.luggagetracker.CurrentBean;
 import mecs.hci.luggagetracker.R;
 
 
@@ -24,6 +23,8 @@ public class LocationFragment extends Fragment {
     private TextView LocationTextView;
 
     private Timer timer;
+    private TextView mTitle;
+
 
     public LocationFragment() {
         // Required empty public constructor
@@ -44,6 +45,10 @@ public class LocationFragment extends Fragment {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_location, container, false);
         LocationTextView = (TextView)rootView.findViewById(R.id.currentTempTextView);
+        mTitle = (TextView) rootView.findViewById(R.id.title);
+
+        Typeface custom_font = Typeface.createFromAsset(getContext().getAssets(),  "fonts/Montserrat-Regular.otf");
+        mTitle.setTypeface(custom_font);
 
         startMonitoringLocation();
 
@@ -54,6 +59,11 @@ public class LocationFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+        Activity a;
+        if (context instanceof Activity) {
+            a = (Activity) context;
+        }
+
     }
 
     @Override
@@ -77,6 +87,15 @@ public class LocationFragment extends Fragment {
             timer.cancel();
         }
         super.onPause();
+    }
+
+    @Override
+    public void onResume() {
+        if (timer !=  null) {
+            timer.cancel();
+        }
+        startMonitoringLocation();
+        super.onResume();
     }
 
 }
