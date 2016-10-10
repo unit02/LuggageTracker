@@ -10,17 +10,23 @@
         android:layout_alignParentTop="true"
         android:background="@color/colorPrimary"
         android:id="@+id/bar">
-
         <TextView
-            android:text="TEMP"
+            android:text="TEMPERATURE"
             android:textStyle="bold"
             android:textSize="25sp"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:textColor="@color/white"
-            android:layout_marginTop="30dp"
-            android:layout_marginStart="20dp"
+            android:gravity="center"
+            android:layout_marginLeft="90dp"
             android:id="@+id/title" />
+        <ImageView
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:background="@drawable/icon_temperature"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
+            />
     </LinearLayout>
 
 

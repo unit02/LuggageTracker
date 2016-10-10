@@ -111,4 +111,17 @@ public class TemperatureFragment extends Fragment {
         super.onPause();
     }
 
+    @Override
+    public void onResume() {
+        if (timer !=  null) {
+            timer.cancel();
+        }
+        if (bean != null) {
+            startMonitoringTemperature();
+        } else {
+            Toast.makeText(getActivity(), "Bean not connected",
+                    Toast.LENGTH_LONG).show();
+        }
+        super.onResume();
+    }
 }
