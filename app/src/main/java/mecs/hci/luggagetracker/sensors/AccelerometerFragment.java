@@ -50,8 +50,7 @@ public class AccelerometerFragment extends Fragment {
 
 
     public static AccelerometerFragment newInstance(String param1, String param2) {
-        AccelerometerFragment fragment = new AccelerometerFragment();
-        return fragment;
+        return new AccelerometerFragment();
     }
 
     @Override
