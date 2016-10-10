@@ -44,7 +44,7 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="151dp"
-        android:background="#dfdfdf"
+        android:background="@color/colorBackground"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"></LinearLayout>
 
