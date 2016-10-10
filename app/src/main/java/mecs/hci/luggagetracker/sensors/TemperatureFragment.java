@@ -120,7 +120,13 @@ public class TemperatureFragment extends Fragment {
                 final int temp;
                 int ran = new Random().nextInt(10);
                 if (ran == 3) {
-                    temp = 25;
+                    //temp = 25;
+                    if (new Random().nextInt(10) == 10) {
+                        temp = 26;
+                        // TODO trigger notification thingy
+                    } else {
+                        temp = 25;
+                    }
                 } else if(ran == 4) {
                     temp = 23;
                 } else {

@@ -106,7 +106,7 @@ public class LightFragment extends Fragment {
                 getActivity().runOnUiThread(new Runnable() {
                     public void run() {
                         // randomly changing numbers
-                        int lightIntensity = r.nextInt(120 - 75) + 75;
+                        int lightIntensity = r.nextInt(122 - 75) + 75;
                         lightTextView.setText(lightIntensity + "");
                         // set progress between 250 and 500
                         progressBar.setProgress(((lightIntensity*(250/120) * 2)));
