@@ -29,45 +29,6 @@
             />
     </LinearLayout>
 
-
-    <!--<LinearLayout-->
-        <!--android:orientation="horizontal"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_marginLeft="40dp"-->
-        <!--android:layout_marginRight="40dp"-->
-        <!--android:layout_below="@+id/bar"-->
-        <!--android:layout_centerHorizontal="true"-->
-        <!--android:layout_marginTop="133dp">-->
-        <!--<TextView-->
-            <!--android:text="Current Temp: "-->
-            <!--android:textSize="24sp"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_weight="3"-->
-            <!--android:gravity="center_vertical"-->
-            <!--android:padding="5dp"-->
-            <!--android:elevation="2dp"-->
-            <!--android:layout_margin="3dp"-->
-            <!--android:background="@drawable/rounded_green"-->
-            <!--android:id="@+id/currentTempertureTitleTextView" />-->
-
-        <!--<TextView-->
-            <!--android:text="25"-->
-            <!--android:textSize="20sp"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:layout_weight="1"-->
-            <!--android:gravity="center"-->
-            <!--android:padding="5dp"-->
-            <!--android:elevation="2dp"-->
-            <!--android:layout_margin="3dp"-->
-            <!--android:background="@drawable/rounded_blue"-->
-            <!--android:textColor="@color/white"-->
-            <!--android:id="@+id/currentTempTextView" />-->
-    <!--</LinearLayout>-->
-
-
     <ProgressBar
         android:id="@+id/progressBar"
         style="?android:attr/progressBarStyleHorizontal"
@@ -108,7 +69,7 @@
         android:gravity="center_vertical"
         android:padding="5dp"
         android:elevation="2dp"
-        android:background="@drawable/rounded_green"
+        android:background="@drawable/rounded_main"
         android:id="@+id/currentTempertureTitleTextView"
         android:layout_marginLeft="3dp"
         android:layout_marginRight="3dp"
