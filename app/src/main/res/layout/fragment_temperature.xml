@@ -10,23 +10,30 @@
         android:layout_alignParentTop="true"
         android:background="@color/colorPrimary"
         android:id="@+id/bar">
-        <TextView
-            android:text="TEMPERATURE"
-            android:textStyle="bold"
-            android:textSize="25sp"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:textColor="@color/white"
-            android:gravity="center"
-            android:layout_marginLeft="90dp"
-            android:id="@+id/title" />
-        <ImageView
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:background="@drawable/icon_temperature"
-            android:layout_gravity="center"
-            android:layout_marginLeft="10dp"
-            />
+            android:orientation="horizontal"
+            android:gravity="center_horizontal"
+            >
+
+            <TextView
+                android:text="TEMP"
+                android:textStyle="bold"
+                android:textSize="25sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:layout_gravity="center"
+                android:id="@+id/title" />
+            <ImageView
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:background="@drawable/icon_temperature"
+                android:layout_gravity="center"
+                android:layout_marginLeft="10dp"
+                />
+        </LinearLayout>
     </LinearLayout>
 
 
@@ -38,17 +45,22 @@
         android:layout_marginRight="40dp"
         android:layout_below="@+id/bar"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="133dp">
+        android:layout_marginTop="35dp"
+        android:elevation="1dp">
+
         <TextView
             android:text="Current Temp: "
-            android:textSize="24sp"
+            android:textSize="21sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="3"
             android:gravity="center_vertical"
-            android:padding="5dp"
-            android:elevation="2dp"
-            android:layout_margin="3dp"
+            android:textColor="@color/colorPrimaryDark"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingBottom="7dp"
+            android:paddingTop="7dp"
+            android:layout_margin="0dp"
             android:background="@drawable/rounded_green"
             android:id="@+id/currentTempertureTitleTextView" />
 
@@ -59,9 +71,11 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:padding="5dp"
-            android:elevation="2dp"
-            android:layout_margin="3dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingBottom="7dp"
+            android:paddingTop="7dp"
+            android:layout_margin="0dp"
             android:background="@drawable/rounded_blue"
             android:textColor="@color/white"
             android:id="@+id/currentTempTextView" />

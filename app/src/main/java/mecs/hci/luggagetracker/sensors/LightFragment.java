@@ -23,7 +23,7 @@ public class LightFragment extends Fragment {
 
     private TextView lightTextView;
     private TextView mTitle;
-
+    private TextView mLuxText;
     private Timer timer;
     private Random r;
 
@@ -52,10 +52,10 @@ public class LightFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_light, container, false);
         lightTextView = (TextView)rootView.findViewById(R.id.currentlightTextView);
         mTitle = (TextView) rootView.findViewById(R.id.title);
-
+        mLuxText = (TextView) rootView.findViewById(R.id.currentlightTitleTextView);
         lightTextView.setTypeface(custom_font);
         mTitle.setTypeface(custom_font);
-
+        mLuxText.setTypeface(custom_font);
         r = new Random();
         startMonitoringlight();
 

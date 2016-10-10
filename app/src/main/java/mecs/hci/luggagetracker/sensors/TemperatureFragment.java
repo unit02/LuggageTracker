@@ -29,6 +29,7 @@ public class TemperatureFragment extends Fragment {
 
     private TextView temperatureTextView;
     private TextView mTitle;
+    private TextView mTemperatureCurrent;
 
     private Timer timer;
 
@@ -54,12 +55,13 @@ public class TemperatureFragment extends Fragment {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_temperature, container, false);
         temperatureTextView = (TextView)rootView.findViewById(R.id.currentTempTextView);
+        mTemperatureCurrent = (TextView)rootView.findViewById(R.id.currentTempertureTitleTextView);
         mTitle = (TextView) rootView.findViewById(R.id.title);
 
         Typeface custom_font = Typeface.createFromAsset(getContext().getAssets(),  "fonts/Montserrat-Regular.otf");
         temperatureTextView.setTypeface(custom_font);
         mTitle.setTypeface(custom_font);
-
+        mTemperatureCurrent.setTypeface(custom_font);
         bean = CurrentBean.getBean();
 
         if (bean != null) {
