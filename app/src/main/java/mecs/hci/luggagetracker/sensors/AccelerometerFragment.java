@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -43,6 +44,7 @@ public class AccelerometerFragment extends Fragment {
     private TextView mYLabel;
     private TextView mZLabel;
     private TextView warningLevel;
+    private ImageView imageView;
     private TextView mTitle;
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabase;
@@ -82,6 +84,8 @@ public class AccelerometerFragment extends Fragment {
 
         mAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference();
+        warningLevel = (TextView)rootView.findViewById(R.id.warningLevel);
+        imageView = (ImageView)rootView.findViewById(R.id.luggageImage);
 
         bean = CurrentBean.getBean();
 
@@ -139,6 +143,12 @@ public class AccelerometerFragment extends Fragment {
                                 ZTextView.setText(Double.toString(result.z()));
                             }
                         });
+                        // TODO setup this method for when bean actually works
+//                        getActivity().runOnUiThread(new Runnable() {
+//                            public void run() {
+//
+//                            }
+//                        });
                     }
                 });
             }
@@ -165,6 +175,7 @@ public class AccelerometerFragment extends Fragment {
                         getActivity().runOnUiThread(new Runnable() {
                             public void run() {
                                 warningLevel.setText("BANG!");
+                                imageView.setImageResource(R.drawable.luggage_impact);
 //                                for (TriggerListener listener : listeners) {
 //                                    listener.significantEventOccurred(mAuth.getCurrentUser(), Type.MOTION);
 //                                }
@@ -174,24 +185,19 @@ public class AccelerometerFragment extends Fragment {
                         getActivity().runOnUiThread(new Runnable() {
                             public void run() {
                                 warningLevel.setText("MOVING");
+                                imageView.setImageResource(R.drawable.walking_with_luggage);
                             }
                         });
                     } else {
                          getActivity().runOnUiThread(new Runnable() {
                             public void run() {
                                 warningLevel.setText("STILL");
+                                imageView.setImageResource(R.drawable.luggage_still);
                             }
                         });
                     }
                 }
                 previousAccel = result;
-                getActivity().runOnUiThread(new Runnable() {
-                    public void run() {
-                        XTextView.setText(String.format(" %.2f ", result.x()));
-                        YTextView.setText(String.format(" %.2f ", result.y()));
-                        ZTextView.setText(String.format(" %.2f ", result.z()));
-                    }
-                });
             }
         }, 0, 750);
     }
@@ -210,10 +216,10 @@ public class AccelerometerFragment extends Fragment {
         if (difference(one.x(), two.x()) > threshold) {
             return true;
         }
-        if (difference(one.y(), two.y()) > threshold) {
+        if (difference(one.y(), two.y()) > threshold*2) {
             return true;
         }
-        if (difference(one.z(), two.z()) > threshold) {
+        if (difference(one.z(), two.z()) > threshold*2) {
             return true;
         }
         return false;

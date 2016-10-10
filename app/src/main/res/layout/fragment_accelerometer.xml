@@ -1,9 +1,12 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="mecs.hci.luggagetracker.sensors.AccelerometerFragment">
+
     <LinearLayout
+        android:id="@+id/titleBar"
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:background="@color/colorPrimary"
@@ -35,112 +38,45 @@
         </LinearLayout>
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_centerVertical="true"
-        android:layout_alignParentStart="true"
-        android:gravity="center_horizontal"
-        android:id="@+id/values"
-        android:layout_below="@id/bar"
-        android:layout_marginTop="20dp"
-        >
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="15dp"
-            android:gravity="center"
-            >
-
-            <TextView
-                android:text="X"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/xLabel"
-                android:textSize="20sp"
-                />
-            <TextView
-                android:text="TextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/xAxisAccelerationTextView"
-                android:textSize="20sp"
-                />
-
-
-
-
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="15dp"
-            android:gravity="center"
-
-            >
-            <TextView
-                android:text="Y"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/yLabel"
-                android:textSize="20sp"
-                />
-            <TextView
-                android:text="TextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/yAxisAccelerationTextView"
-                android:textSize="20sp"
-                />
-
-
-
-
-
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="15dp"
-            android:gravity="center"
-
-            >
-
-            <TextView
-                android:text="Z"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/zLabel"
-                android:textSize="20sp"
-                />
-
-
-            <TextView
-                android:text="TextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/zAxisAccelerationTextView"
-                android:textSize="20sp"
-                />
-
-
-
-        </LinearLayout>
-    </LinearLayout>
-
-
     <TextView
-        android:text="No problems"
+        android:text="Current Luggage Movement"
+        android:textSize="24sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/values"
+        android:gravity="center"
+        android:padding="5dp"
+        android:elevation="2dp"
+        android:background="@drawable/rounded_main"
+        android:id="@+id/warningLabel"
+        android:layout_marginLeft="3dp"
+        android:layout_marginRight="3dp"
+        android:layout_below="@+id/titleBar"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        android:id="@+id/warningLevel" />
+        android:layout_marginTop="54dp" />
+
+    <ImageView
+        android:id="@+id/luggageImage"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        app:srcCompat="@drawable/luggage_still"
+        android:layout_below="@+id/warningLabel"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="41dp" />
+
+    <TextView
+        android:text="Still"
+        android:textSize="24sp"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="5dp"
+        android:elevation="2dp"
+        android:id="@+id/warningLevel"
+        android:layout_marginLeft="3dp"
+        android:layout_marginRight="3dp"
+        android:layout_below="@+id/luggageImage"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="24dp" />
 
 
 
