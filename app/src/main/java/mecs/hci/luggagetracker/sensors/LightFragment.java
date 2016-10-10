@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import java.util.Date;
@@ -22,7 +23,7 @@ public class LightFragment extends Fragment {
     public static String TAG = "lightFragment";
 
     private TextView lightTextView;
-    private TextView mTitle;
+    private ProgressBar progressBar;
 
     private Timer timer;
     private Random r;
@@ -50,8 +51,9 @@ public class LightFragment extends Fragment {
         int value = (int) (new Date().getTime()/1000);
         Typeface custom_font = Typeface.createFromAsset(getContext().getAssets(),  "fonts/Montserrat-Regular.otf");
         View rootView = inflater.inflate(R.layout.fragment_light, container, false);
+        progressBar = (ProgressBar)rootView.findViewById(R.id.progressBar);
         lightTextView = (TextView)rootView.findViewById(R.id.currentlightTextView);
-        mTitle = (TextView) rootView.findViewById(R.id.title);
+        TextView mTitle = (TextView) rootView.findViewById(R.id.title);
 
         lightTextView.setTypeface(custom_font);
         mTitle.setTypeface(custom_font);
@@ -85,6 +87,8 @@ public class LightFragment extends Fragment {
                         // randomly changing numbers
                         int lightIntensity = r.nextInt(80 - 75) + 75;
                         lightTextView.setText(lightIntensity + "");
+                        // set progress between 250 and 500
+                        progressBar.setProgress((int)((lightIntensity*(250/200.0))+250));
                     }
                 });
 

@@ -5,6 +5,7 @@
     tools:context=".sensors.SecurityFragment">
 
     <LinearLayout
+        android:id="@+id/titleBar"
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:background="@color/colorPrimary">
@@ -24,29 +25,10 @@
         android:text="Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textView"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="101dp"
-        android:id="@+id/securityBtn" />
-
-    <ProgressBar
-        android:id="@+id/progressBar"
-        style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="300dp"
-        android:layout_height="300dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:max="500"
-        android:progress="420"
-        android:progressDrawable="@drawable/circle_progress_bar" />
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="151dp"
-        android:background="@color/colorBackground"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"></LinearLayout>
+        android:id="@+id/securityBtn"
+        android:layout_marginTop="57dp"
+        android:layout_below="@+id/titleBar"
+        android:layout_centerHorizontal="true" />
 
 
 </RelativeLayout>
