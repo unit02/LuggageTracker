@@ -96,5 +96,14 @@ public class LightFragment extends Fragment {
         super.onPause();
     }
 
+    @Override
+    public void onResume() {
+        if (timer !=  null) {
+            timer.cancel();
+        }
+        startMonitoringlight();
+        super.onResume();
+    }
+
 
 }

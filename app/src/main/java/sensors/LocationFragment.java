@@ -79,4 +79,13 @@ public class LocationFragment extends Fragment {
         super.onPause();
     }
 
+    @Override
+    public void onResume() {
+        if (timer !=  null) {
+            timer.cancel();
+        }
+        startMonitoringLocation();
+        super.onResume();
+    }
+
 }
