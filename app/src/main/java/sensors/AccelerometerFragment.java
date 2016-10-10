@@ -2,7 +2,6 @@ package sensors;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.os.Parcel;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -41,8 +40,7 @@ public class AccelerometerFragment extends Fragment {
 
 
     public static AccelerometerFragment newInstance(String param1, String param2) {
-        AccelerometerFragment fragment = new AccelerometerFragment();
-        return fragment;
+        return new AccelerometerFragment();
     }
 
     @Override
