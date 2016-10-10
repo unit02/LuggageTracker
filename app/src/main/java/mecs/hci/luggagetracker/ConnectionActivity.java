@@ -1,9 +1,11 @@
 package mecs.hci.luggagetracker;
 
+import android.*;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -139,6 +141,7 @@ public class ConnectionActivity extends AppCompatActivity {
                 }
             }
         };
+        ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.ACCESS_COARSE_LOCATION}, 0);
         BeanManager bm = BeanManager.getInstance();
         //bm.setScanTimeout(45);
         bm.startDiscovery(listener);
