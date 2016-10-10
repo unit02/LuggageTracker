@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -29,6 +30,8 @@ public class LightFragment extends Fragment {
     private TextView lightTextView;
     private TextView mTitle;
     private TextView mLuxText;
+    private ProgressBar progressBar;
+
     private Timer timer;
     private Random r;
     private FirebaseAuth mAuth;
@@ -58,6 +61,7 @@ public class LightFragment extends Fragment {
         int value = (int) (new Date().getTime()/1000);
         Typeface custom_font = Typeface.createFromAsset(getContext().getAssets(),  "fonts/Montserrat-Regular.otf");
         View rootView = inflater.inflate(R.layout.fragment_light, container, false);
+        progressBar = (ProgressBar)rootView.findViewById(R.id.progressBar);
         lightTextView = (TextView)rootView.findViewById(R.id.currentlightTextView);
         mTitle = (TextView) rootView.findViewById(R.id.title);
         mLuxText = (TextView) rootView.findViewById(R.id.currentlightTitleTextView);
@@ -101,6 +105,8 @@ public class LightFragment extends Fragment {
                         // randomly changing numbers
                         int lightIntensity = r.nextInt(120 - 75) + 75;
                         lightTextView.setText(lightIntensity + "");
+                        // set progress between 250 and 500
+                        progressBar.setProgress((int)((lightIntensity*(250/200.0))+250));
                         if (lightIntensity > 100) {
                             for (TriggerListener listener : listeners) {
                                     listener.significantEventOccurred(mAuth.getCurrentUser(), Type.LIGHT);

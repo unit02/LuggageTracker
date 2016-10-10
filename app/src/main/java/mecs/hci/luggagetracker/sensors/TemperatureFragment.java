@@ -8,12 +8,14 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.punchthrough.bean.sdk.Bean;
 import com.punchthrough.bean.sdk.message.Callback;
 
+import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -30,6 +32,7 @@ public class TemperatureFragment extends Fragment {
     private TextView temperatureTextView;
     private TextView mTitle;
     private TextView mTemperatureCurrent;
+    private ProgressBar progressBar;
 
     private Timer timer;
 
@@ -54,6 +57,7 @@ public class TemperatureFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_temperature, container, false);
+        progressBar = (ProgressBar)rootView.findViewById(R.id.progressBar);
         temperatureTextView = (TextView)rootView.findViewById(R.id.currentTempTextView);
         mTemperatureCurrent = (TextView)rootView.findViewById(R.id.currentTempertureTitleTextView);
         mTitle = (TextView) rootView.findViewById(R.id.title);
@@ -68,7 +72,8 @@ public class TemperatureFragment extends Fragment {
             startMonitoringTemperature();
         } else {
             Toast.makeText(getActivity(), "Bean not connected",
-                    Toast.LENGTH_LONG).show();
+                    Toast.LENGTH_SHORT).show();
+            startFakingTemperature();
         }
 
         return rootView;
@@ -97,8 +102,35 @@ public class TemperatureFragment extends Fragment {
                         getActivity().runOnUiThread(new Runnable() {
                             public void run() {
                               temperatureTextView.setText(Integer.toString(result));
+                                // set progress between 250 and 500
+                                progressBar.setProgress((int)((result*(250/30.0))+250));
                             }
                         });
+                    }
+                });
+            }
+        }, 0, 250);
+    }
+
+    private void startFakingTemperature(){
+        timer = new Timer();
+        timer.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                final int temp;
+                int ran = new Random().nextInt(10);
+                if (ran == 3) {
+                    temp = 25;
+                } else if(ran == 4) {
+                    temp = 23;
+                } else {
+                    temp = 24;
+                }
+                getActivity().runOnUiThread(new Runnable() {
+                    public void run() {
+                        temperatureTextView.setText(Integer.toString(temp));
+                        // set progress between 250 and 500
+                        progressBar.setProgress((int)((temp*(250/30.0))+250));
                     }
                 });
             }
@@ -122,7 +154,8 @@ public class TemperatureFragment extends Fragment {
             startMonitoringTemperature();
         } else {
             Toast.makeText(getActivity(), "Bean not connected",
-                    Toast.LENGTH_LONG).show();
+                    Toast.LENGTH_SHORT).show();
+            startFakingTemperature();
         }
         super.onResume();
     }

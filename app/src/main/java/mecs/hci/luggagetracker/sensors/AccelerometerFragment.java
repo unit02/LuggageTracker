@@ -103,7 +103,7 @@ public class AccelerometerFragment extends Fragment {
             startMonitoringAccelerometer();
         } else {
             Toast.makeText(getActivity(), "Bean not connected, sensor data will not work",
-                    Toast.LENGTH_LONG).show();
+                    Toast.LENGTH_SHORT).show();
             startFakeAccelerometer();
         }
 
@@ -243,7 +243,7 @@ public class AccelerometerFragment extends Fragment {
             startMonitoringAccelerometer();
         } else {
             Toast.makeText(getActivity(), "Bean not connected, sensor data will not work",
-                    Toast.LENGTH_LONG).show();
+                    Toast.LENGTH_SHORT).show();
             startFakeAccelerometer();
         }
         super.onResume();

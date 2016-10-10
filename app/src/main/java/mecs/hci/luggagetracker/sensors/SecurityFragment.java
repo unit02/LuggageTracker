@@ -1,4 +1,4 @@
-package layout;
+package mecs.hci.luggagetracker.sensors;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -38,7 +38,7 @@ public class SecurityFragment extends Fragment {
         btn.setOnClickListener(listener);
         btn.setBackgroundColor(Color.GREEN);
 
-        rootView.findViewById(R.id.progress_bar).getBackground().setLevel(2500);
+        //rootView.findViewById(R.id.progressBar).getBackground().setLevel(5000);
 
         return rootView;
     }
@@ -57,10 +57,12 @@ public class SecurityFragment extends Fragment {
     private void unlock() {
         btn.setText("Lock suitcase");
         btn.setBackgroundColor(Color.RED);
+        isLocked = false;
     }
 
     private void lock() {
         btn.setText("Unlock suitcase");
         btn.setBackgroundColor(Color.GREEN);
+        isLocked = true;
     }
 }
