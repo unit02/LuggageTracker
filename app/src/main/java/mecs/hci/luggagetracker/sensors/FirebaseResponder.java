@@ -1,5 +1,7 @@
 package mecs.hci.luggagetracker.sensors;
 
+import android.util.Log;
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -21,15 +23,15 @@ public class FirebaseResponder implements TriggerListener {
 
 
     @Override
-    public void significantEventOccurred(final FirebaseUser user, final CurrentBean bean, final Type type) {
+    public void significantEventOccurred(final FirebaseUser user, final Type type) {
         final String userID = user.getUid();
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
-        mDatabase.child("logs").child(userID).addValueEventListener(
+        mDatabase.child("logs").child(userID).addListenerForSingleValueEvent(
                 new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-                        updateLogs(userID, bean, (int) dataSnapshot.getChildrenCount(), type);
+                        updateLogs(userID, (int) dataSnapshot.getChildrenCount(), type);
                     }
 
                     @Override
@@ -40,9 +42,10 @@ public class FirebaseResponder implements TriggerListener {
         );
     }
 
-    private void updateLogs(String id, CurrentBean bean, int logNumber, Type type) {
+    private void updateLogs(String id, int logNumber, Type type) {
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-        mRef = mDatabase.child("logs").child(id).child(Integer.toString(logNumber++));
+        logNumber++;
+        mRef = mDatabase.child("logs").child(id).child(Integer.toString(logNumber));
 
         mRef.child("time").setValue(sdf.format(new Date()));
         mRef.child("type").setValue(type.toString());

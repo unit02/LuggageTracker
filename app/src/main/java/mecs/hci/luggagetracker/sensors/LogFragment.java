@@ -187,7 +187,6 @@ public class LogFragment extends Fragment {
 
         }
 
-
         // Sets the number of questions in the test into the cards
         public void setType(Type type) {
             TextView field = (TextView) mView.findViewById(R.id.log_type);

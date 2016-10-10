@@ -10,5 +10,5 @@ import mecs.hci.luggagetracker.CurrentBean;
 import mecs.hci.luggagetracker.Models.Type;
 
 interface TriggerListener {
-    void significantEventOccurred(FirebaseUser user, CurrentBean bean, Type type);
+    void significantEventOccurred(FirebaseUser user, Type type);
 }

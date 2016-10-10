@@ -24,6 +24,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import mecs.hci.luggagetracker.CurrentBean;
+import mecs.hci.luggagetracker.Models.Type;
 import mecs.hci.luggagetracker.R;
 
 
@@ -78,6 +79,7 @@ public class AccelerometerFragment extends Fragment {
         YTextView.setTypeface(custom_font);
         XTextView.setTypeface(custom_font);
         mTitle.setTypeface(custom_font);
+
 
         FirebaseResponder responder = new FirebaseResponder();
         addListener(responder);
@@ -150,6 +152,9 @@ public class AccelerometerFragment extends Fragment {
                         getActivity().runOnUiThread(new Runnable() {
                             public void run() {
                                 warningLevel.setText("BANG!");
+                                for (TriggerListener listener : listeners) {
+                                    listener.significantEventOccurred(mAuth.getCurrentUser(), Type.ACCELEROMETER);
+                                }
                             }
                         });
                     } else if (accelerometerMoving(result, previousAccel)) {
