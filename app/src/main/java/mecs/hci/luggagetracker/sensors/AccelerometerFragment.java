@@ -226,7 +226,7 @@ public class AccelerometerFragment extends Fragment {
     }
 
     private boolean isKnocked(Acceleration one, Acceleration two) {
-        double threshold = 0.5;
+        double threshold = 0.6;
         return (difference(one.x(), two.x()) > threshold &&
                 difference(one.y(), two.y()) > threshold &&
                 difference(one.z(), two.z()) > threshold);
