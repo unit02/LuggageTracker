@@ -1,15 +1,18 @@
 package mecs.hci.luggagetracker.sensors;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -71,6 +74,13 @@ public class LightFragment extends Fragment {
         lightTextView.setTypeface(custom_font);
         mTitle.setTypeface(custom_font);
         mLuxText.setTypeface(custom_font);
+
+        ImageView img = (ImageView) rootView.findViewById(R.id.helpBtn);
+        img.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                showHelp();
+            }
+        });
 
         mAuth = FirebaseAuth.getInstance();
         FirebaseResponder responder = new FirebaseResponder();
@@ -162,5 +172,22 @@ public class LightFragment extends Fragment {
         super.onResume();
     }
 
+    private void showHelp() {
+        new AlertDialog.Builder(getContext())
+                .setTitle("Light")
+                .setMessage("The light sensor within the suitcases detects the current lux value. This can be used to indicate if the bag is opened as light will be detected. If the lux value exceeds 120 it will be recorded in the log")
+//                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+//                    public void onClick(DialogInterface dialog, int which) {
+//                        // continue with delete
+//                    }
+//                })
+//                .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+//                    public void onClick(DialogInterface dialog, int which) {
+//                        // do nothing
+//                    }
+//                })
+                .setIcon(R.drawable.question_mark_dark)
+                .show();
+    }
 
 }

@@ -5,9 +5,11 @@ import android.content.Context;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -60,6 +62,13 @@ public class LocationFragment extends Fragment implements OnMapReadyCallback  {
         mTitle.setTypeface(custom_font);
 
         startMonitoringLocation();
+
+        ImageView img = (ImageView) rootView.findViewById(R.id.helpBtn);
+        img.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                showHelp();
+            }
+        });
 
 
         SupportMapFragment mapFragment = (SupportMapFragment) this.getChildFragmentManager()
@@ -128,5 +137,22 @@ public class LocationFragment extends Fragment implements OnMapReadyCallback  {
 
     }
 
+    private void showHelp() {
+        new AlertDialog.Builder(getContext())
+                .setTitle("Location")
+                .setMessage("The GPS within the luggage tracks its current location which is displayed on the map. It can be used to check your luggage is where you expect")
+//                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+//                    public void onClick(DialogInterface dialog, int which) {
+//                        // continue with delete
+//                    }
+//                })
+//                .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+//                    public void onClick(DialogInterface dialog, int which) {
+//                        // do nothing
+//                    }
+//                })
+                .setIcon(R.drawable.question_mark_dark)
+                .show();
+    }
 
 }

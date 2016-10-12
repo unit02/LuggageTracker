@@ -6,11 +6,13 @@ import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.util.Log;
 
@@ -115,6 +117,13 @@ public class LogFragment extends Fragment {
         mRef = FirebaseDatabase.getInstance().getReference();
         mRef.keepSynced(true);
 
+        ImageView img = (ImageView) view.findViewById(R.id.helpBtn);
+        img.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                showHelp();
+            }
+        });
+
         mLogRef = mRef.child("logs").child(mAuth.getCurrentUser().getUid());
         attachRecyclerViewAdapter();
         return view;
@@ -214,5 +223,23 @@ public class LogFragment extends Fragment {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
+    }
+
+    private void showHelp() {
+        new AlertDialog.Builder(getContext())
+                .setTitle("Log")
+                .setMessage("The log shows all significant events which have occurred. In the log you can see which sensor recognized the event and at what time.")
+//                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+//                    public void onClick(DialogInterface dialog, int which) {
+//                        // continue with delete
+//                    }
+//                })
+//                .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+//                    public void onClick(DialogInterface dialog, int which) {
+//                        // do nothing
+//                    }
+//                })
+                .setIcon(R.drawable.question_mark_dark)
+                .show();
     }
 }
