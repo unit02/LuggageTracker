@@ -36,6 +36,16 @@
         </LinearLayout>
     </LinearLayout>
 
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        app:srcCompat="@drawable/question_mark"
+        android:id="@+id/helpBtn"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="35dp"
+        android:layout_marginRight="20dp"/>
+
     <Button
         android:text="Alarm OFF"
         android:layout_width="150dp"
