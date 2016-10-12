@@ -70,6 +70,7 @@ public class ConnectionActivity extends AppCompatActivity {
         final List<Bean> beans = new ArrayList<>();
 
         loadingProgressTextView.setText(R.string.bean_searching);
+        Log.i(TAG, "Starting bean search");
 
         BeanDiscoveryListener listener = new BeanDiscoveryListener() {
             @Override

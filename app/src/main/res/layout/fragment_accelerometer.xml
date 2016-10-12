@@ -49,7 +49,7 @@
         android:id="@+id/warningLabel"
         android:layout_marginLeft="3dp"
         android:layout_marginRight="3dp"
-        android:layout_below="@+id/titleBar"
+        android:layout_below="@+id/bar"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="54dp" />
 
