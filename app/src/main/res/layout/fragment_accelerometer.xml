@@ -37,6 +37,17 @@
         </LinearLayout>
     </LinearLayout>
 
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        app:srcCompat="@drawable/question_mark"
+        android:id="@+id/helpBtn"
+        android:onClick="showHelp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="35dp"
+        android:layout_marginRight="20dp"/>
+
     <TextView
         android:text="Current Luggage Movement"
         android:textSize="24sp"
@@ -49,7 +60,7 @@
         android:id="@+id/warningLabel"
         android:layout_marginLeft="3dp"
         android:layout_marginRight="3dp"
-        android:layout_below="@+id/titleBar"
+        android:layout_below="@+id/bar"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="54dp" />
 

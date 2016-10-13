@@ -2,6 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="mecs.hci.luggagetracker.sensors.LightFragment">
 
 
@@ -36,6 +37,16 @@
                 />
         </LinearLayout>
     </LinearLayout>
+
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        app:srcCompat="@drawable/question_mark"
+        android:id="@+id/helpBtn"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="35dp"
+        android:layout_marginRight="20dp"/>
 
     <ProgressBar
         android:id="@+id/progressBar"

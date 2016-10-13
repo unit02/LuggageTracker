@@ -1,9 +1,11 @@
 package mecs.hci.luggagetracker.sensors;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,12 +39,12 @@ public class AccelerometerFragment extends Fragment {
 
 
 
-    private TextView  XTextView;
-    private TextView  YTextView;
-    private TextView  ZTextView;
-    private TextView mXLabel;
-    private TextView mYLabel;
-    private TextView mZLabel;
+//    private TextView  XTextView;
+//    private TextView  YTextView;
+//    private TextView  ZTextView;
+//    private TextView mXLabel;
+//    private TextView mYLabel;
+//    private TextView mZLabel;
     private TextView warningLevel;
     private ImageView imageView;
     private TextView mTitle;
@@ -100,6 +102,13 @@ public class AccelerometerFragment extends Fragment {
 //        mTitle.setTypeface(custom_font);
 //        warningLevel.setTypeface(custom_font);
 
+        ImageView img = (ImageView) rootView.findViewById(R.id.helpBtn);
+        img.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                showHelp();
+            }
+        });
+
         FirebaseResponder responder = new FirebaseResponder();
         addListener(responder);
 
@@ -138,9 +147,9 @@ public class AccelerometerFragment extends Fragment {
                     public void onResult(final Acceleration result) {
                         getActivity().runOnUiThread(new Runnable() {
                             public void run() {
-                                XTextView.setText(Double.toString(result.x()));
-                                YTextView.setText(Double.toString(result.y()));
-                                ZTextView.setText(Double.toString(result.z()));
+//                                XTextView.setText(Double.toString(result.x()));
+//                                YTextView.setText(Double.toString(result.y()));
+//                                ZTextView.setText(Double.toString(result.z()));
                             }
                         });
                         // TODO setup this method for when bean actually works
@@ -253,5 +262,23 @@ public class AccelerometerFragment extends Fragment {
             startFakeAccelerometer();
         }
         super.onResume();
+    }
+
+    private void showHelp() {
+        new AlertDialog.Builder(getContext())
+                .setTitle("Motion")
+                .setMessage("The suitcases motion is detected through the use of an accelerometer. It can detect three states: still, moving and impacts. If your suitcase is in an impact it will be recorded in the log")
+//                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+//                    public void onClick(DialogInterface dialog, int which) {
+//                        // continue with delete
+//                    }
+//                })
+//                .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+//                    public void onClick(DialogInterface dialog, int which) {
+//                        // do nothing
+//                    }
+//                })
+                .setIcon(R.drawable.question_mark_dark)
+                .show();
     }
 }

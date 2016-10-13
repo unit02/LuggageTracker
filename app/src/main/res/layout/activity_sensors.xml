@@ -20,8 +20,8 @@
         app:srcCompat="@drawable/icon_swipe"
         android:id="@+id/imageView"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
+        android:layout_alignParentLeft="true"
         android:layout_marginBottom="20dp"
-        android:layout_marginRight="20dp"/>
+        android:layout_marginLeft="20dp"/>
 
 </RelativeLayout>
