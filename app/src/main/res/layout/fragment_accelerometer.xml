@@ -38,18 +38,17 @@
     </LinearLayout>
 
     <TextView
-        android:text="Current Luggage Movement"
+        android:text="Current Movement"
         android:textSize="24sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:padding="5dp"
-        android:elevation="2dp"
-        android:background="@drawable/rounded_main"
+        android:textColor="@color/colorPrimaryDark"
         android:id="@+id/warningLabel"
         android:layout_marginLeft="3dp"
         android:layout_marginRight="3dp"
-        android:layout_below="@+id/titleBar"
+        android:layout_below="@+id/bar"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="54dp" />
 
