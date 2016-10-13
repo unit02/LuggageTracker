@@ -4,10 +4,12 @@ import android.content.Context;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -67,6 +69,13 @@ public class TemperatureFragment extends Fragment {
         mTitle.setTypeface(custom_font);
         mTemperatureCurrent.setTypeface(custom_font);
         bean = CurrentBean.getBean();
+
+        ImageView img = (ImageView) rootView.findViewById(R.id.helpBtn);
+        img.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                showHelp();
+            }
+        });
 
         if (bean != null) {
             startMonitoringTemperature();
@@ -164,5 +173,23 @@ public class TemperatureFragment extends Fragment {
             startFakingTemperature();
         }
         super.onResume();
+    }
+
+    private void showHelp() {
+        new AlertDialog.Builder(getContext())
+                .setTitle("Temperature")
+                .setMessage("Use the temperature sensor to ensure your goods remain in the optimal conditions. If the suitcases temperature exceeds 25 degrees it will be recorded in the log")
+//                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+//                    public void onClick(DialogInterface dialog, int which) {
+//                        // continue with delete
+//                    }
+//                })
+//                .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+//                    public void onClick(DialogInterface dialog, int which) {
+//                        // do nothing
+//                    }
+//                })
+                .setIcon(R.drawable.question_mark_dark)
+                .show();
     }
 }
