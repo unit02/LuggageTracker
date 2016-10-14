@@ -142,9 +142,8 @@ public class ConnectionActivity extends AppCompatActivity {
                 }
             }
         };
-        ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.ACCESS_COARSE_LOCATION}, 0);
         BeanManager bm = BeanManager.getInstance();
-        //bm.setScanTimeout(45);
+        bm.setScanTimeout(60);
         bm.startDiscovery(listener);
     }
 
