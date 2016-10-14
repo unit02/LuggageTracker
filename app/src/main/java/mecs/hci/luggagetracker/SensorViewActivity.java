@@ -9,6 +9,13 @@ import android.view.View;
 
 import com.google.firebase.database.FirebaseDatabase;
 
+import mecs.hci.luggagetracker.sensors.AccelerometerFragment;
+import mecs.hci.luggagetracker.sensors.LightFragment;
+import mecs.hci.luggagetracker.sensors.LocationFragment;
+import mecs.hci.luggagetracker.sensors.LogFragment;
+import mecs.hci.luggagetracker.sensors.SecurityFragment;
+import mecs.hci.luggagetracker.sensors.TemperatureFragment;
+
 public class SensorViewActivity extends AppCompatActivity {
 
     @Override
@@ -21,21 +28,29 @@ public class SensorViewActivity extends AppCompatActivity {
         int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN;
         decorView.setSystemUiVisibility(uiOptions);
 
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
+
+
 
         ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
-
-        // Setup viewpageradapter
-        ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
-        viewPager.setAdapter(viewPagerAdapter);
+        setupViewPager(viewPager);
 
 
-        // Setting the title of the tabs
-//        accelerometerTab.setText("Accelerometer");
-//        lightTab.setText("Light");
-//        temperatureTab.setText("Temp");
-//        locationTab.setText("Location");
+        tabLayout.setupWithViewPager(viewPager);
 
 
+
+    }
+
+    private void setupViewPager(ViewPager viewPager) {
+        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
+        adapter.addFragment(new SecurityFragment(), "Security");
+        adapter.addFragment(new AccelerometerFragment(), "Accelerometer");
+        adapter.addFragment(new LightFragment(), "Light");
+        adapter.addFragment(new TemperatureFragment(), "Temperature");
+        adapter.addFragment(new LocationFragment(), "Location");
+        adapter.addFragment(new LogFragment(), "Log");
+        viewPager.setAdapter(adapter);
     }
 
 

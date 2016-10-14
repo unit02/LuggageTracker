@@ -11,8 +11,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import mecs.hci.luggagetracker.R;
 
@@ -20,7 +22,7 @@ import mecs.hci.luggagetracker.R;
 public class SecurityFragment extends Fragment {
 
     private boolean isLocked = false;
-    private Button btn;
+    private Switch btn;
     private TextView mTitle;
     private ImageView imageView;
 
@@ -41,12 +43,9 @@ public class SecurityFragment extends Fragment {
         View rootView =  inflater.inflate(R.layout.fragment_security, container, false);
 
         imageView = (ImageView)rootView.findViewById(R.id.imageView);
-        btn = (Button) rootView.findViewById(R.id.securityBtn);
+        btn = (Switch) rootView.findViewById(R.id.securityBtn);
         btn.setOnClickListener(listener);
-        mTitle = (TextView) rootView.findViewById(R.id.title);
         Typeface custom_font = Typeface.createFromAsset(getContext().getAssets(),  "fonts/Montserrat-Regular.otf");
-
-        mTitle.setTypeface(custom_font);
 
         //rootView.findViewById(R.id.progressBar).getBackground().setLevel(5000);
         unlock();
@@ -73,19 +72,29 @@ public class SecurityFragment extends Fragment {
     };
 
     private void unlock() {
-        btn.setText("Alarm OFF");
-        btn.setTextColor(Color.WHITE);
-        btn.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+        btn.setChecked(false);
+//        btn.setTextColor(Color.GREEN);
         imageView.setImageResource(R.drawable.unlocked_icon);
         isLocked = false;
+        Context context = getContext();
+        CharSequence text = "Security is off";
+        int duration = Toast.LENGTH_SHORT;
+
+        Toast toast = Toast.makeText(context, text, duration);
+        toast.show();
     }
 
     private void lock() {
-        btn.setText("Alarm ON");
-        btn.setTextColor(Color.DKGRAY);
-        btn.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+        btn.setChecked(true);
+//        btn.setTextColor(Color.RED);
         imageView.setImageResource(R.drawable.locked_icon);
         isLocked = true;
+        Context context = getContext();
+        CharSequence text = "Security is on";
+        int duration = Toast.LENGTH_SHORT;
+
+        Toast toast = Toast.makeText(context, text, duration);
+        toast.show();
     }
 
     private void showHelp() {

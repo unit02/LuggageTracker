@@ -45,7 +45,8 @@ public class AccelerometerFragment extends Fragment {
 //    private TextView mXLabel;
 //    private TextView mYLabel;
 //    private TextView mZLabel;
-    private TextView warningLevel;
+    private TextView mWarningLevel;
+    private TextView mWarningLabel;
     private ImageView imageView;
     private TextView mTitle;
     private FirebaseAuth mAuth;
@@ -81,12 +82,12 @@ public class AccelerometerFragment extends Fragment {
 //        mYLabel = (TextView)rootView.findViewById(R.id.yLabel);
 //        mZLabel = (TextView)rootView.findViewById(R.id.zLabel);
         mTitle = (TextView) rootView.findViewById(R.id.title);
-        warningLevel = (TextView) rootView.findViewById(R.id.warningLevel);
+        mWarningLevel = (TextView) rootView.findViewById(R.id.warningLevel);
+        mWarningLabel = (TextView) rootView.findViewById(R.id.warningLabel);
 
 
         mAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference();
-        warningLevel = (TextView)rootView.findViewById(R.id.warningLevel);
         imageView = (ImageView)rootView.findViewById(R.id.luggageImage);
 
         bean = CurrentBean.getBean();
@@ -100,8 +101,8 @@ public class AccelerometerFragment extends Fragment {
 //        mYLabel.setTypeface(custom_font);
 //        mZLabel.setTypeface(custom_font);
 //        mTitle.setTypeface(custom_font);
-//        warningLevel.setTypeface(custom_font);
-
+        mWarningLevel.setTypeface(custom_font);
+        mWarningLabel.setTypeface(custom_font);
         ImageView img = (ImageView) rootView.findViewById(R.id.helpBtn);
         img.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -183,7 +184,7 @@ public class AccelerometerFragment extends Fragment {
                     if (isKnocked(result, previousAccel)) {
                         getActivity().runOnUiThread(new Runnable() {
                             public void run() {
-                                warningLevel.setText("BANG!");
+                                mWarningLevel.setText("BANG!");
                                 imageView.setImageResource(R.drawable.luggage_impact);
 //                                for (TriggerListener listener : listeners) {
 //                                    listener.significantEventOccurred(mAuth.getCurrentUser(), Type.MOTION);
@@ -193,14 +194,14 @@ public class AccelerometerFragment extends Fragment {
                     } else if (accelerometerMoving(result, previousAccel)) {
                         getActivity().runOnUiThread(new Runnable() {
                             public void run() {
-                                warningLevel.setText("MOVING");
+                                mWarningLevel.setText("MOVING");
                                 imageView.setImageResource(R.drawable.walking_with_luggage);
                             }
                         });
                     } else {
                          getActivity().runOnUiThread(new Runnable() {
                             public void run() {
-                                warningLevel.setText("STILL");
+                                mWarningLevel.setText("STILL");
                                 imageView.setImageResource(R.drawable.luggage_still);
                             }
                         });

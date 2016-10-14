@@ -4,6 +4,9 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import mecs.hci.luggagetracker.sensors.AccelerometerFragment;
 import mecs.hci.luggagetracker.sensors.LightFragment;
 import mecs.hci.luggagetracker.sensors.LocationFragment;
@@ -14,34 +17,32 @@ import mecs.hci.luggagetracker.sensors.TemperatureFragment;
 
 public class ViewPagerAdapter extends FragmentStatePagerAdapter {
 
+    private final List<Fragment> mFragmentList = new ArrayList<>();
+    private final List<String> mFragmentTitleList = new ArrayList<>();
+
     public ViewPagerAdapter(FragmentManager fm) {
         super(fm);
     }
 
     @Override
     public Fragment getItem(int position) {
-        switch (position){
-            case 0:
-                return new SecurityFragment();
-            case 1:
-                return new AccelerometerFragment();
-            case 2:
-                return new LightFragment();
-            case 3:
-                return new TemperatureFragment();
-            case 4:
-                return new LocationFragment();
-            case 5:
-                return new LogFragment();
-        }
-        return new LightFragment();
+        return mFragmentList.get(position);
     }
 
     @Override
     public int getCount() {
-        return 6;           // As there are only 3 Tabs
+        return mFragmentList.size();
     }
 
+    public void addFragment(Fragment fragment, String title) {
+        mFragmentList.add(fragment);
+        mFragmentTitleList.add(title);
+    }
+
+    @Override
+    public CharSequence getPageTitle(int position) {
+        return mFragmentTitleList.get(position);
+    }
 
 
 }
