@@ -8,6 +8,9 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -46,6 +49,7 @@ public class LoginActivity extends AppCompatActivity {
     private DatabaseReference mDatabase;
     private TextView mTitleText;
     private TextView mTitleText2;
+    private ImageView mLogo;
 
 
     private CallbackManager mCallbackManager;
@@ -55,6 +59,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         FacebookSdk.sdkInitialize(getApplicationContext());
         setContentView(R.layout.activity_login);
+
 
 
         // Hide the status bar.
@@ -71,11 +76,20 @@ public class LoginActivity extends AppCompatActivity {
 
         }
 
+        mLogo = (ImageView) findViewById(R.id.luggage_logo);
         mTitleText = (TextView) findViewById(R.id.luggage_title);
         mTitleText2 = (TextView) findViewById(R.id.luggage_title2);
+
+        mLogo.setVisibility(View.INVISIBLE);
+        mTitleText.setVisibility(View.INVISIBLE);
+        mTitleText2.setVisibility(View.INVISIBLE);
+
         Typeface custom_font = Typeface.createFromAsset(getAssets(),  "fonts/Montserrat-Regular.otf");
         mTitleText.setTypeface(custom_font);
         mTitleText2.setTypeface(custom_font);
+
+
+        animateLogo();
 
 
 
@@ -140,6 +154,44 @@ public class LoginActivity extends AppCompatActivity {
     }
     // [END on_stop_remove_listener]
 
+
+    private void animateLogo() {
+        final Animation in = new AlphaAnimation(0.0f, 1.0f);
+        final Animation in2 = new AlphaAnimation(0.0f, 1.0f);
+
+        in.setDuration(1500);
+        in2.setDuration(1500);
+
+
+        in.setAnimationListener(
+                new Animation.AnimationListener() {
+                    @Override
+                    public void onAnimationStart(Animation animation) {
+
+                    }
+
+                    @Override
+                    public void onAnimationEnd(Animation animation) {
+                        Log.d("Animate", "animating");
+                        mTitleText.setVisibility(View.VISIBLE);
+                        mTitleText2.setVisibility(View.VISIBLE);
+
+                        mTitleText.startAnimation(in2);
+                        mTitleText2.startAnimation(in2);
+                    }
+
+                    @Override
+                    public void onAnimationRepeat(Animation animation) {
+
+                    }
+                }
+        );
+
+        mLogo.setVisibility(View.VISIBLE);
+
+        mLogo.startAnimation(in);
+
+    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
