@@ -1,6 +1,7 @@
 package mecs.hci.luggagetracker.Auth;
 
 import android.graphics.Typeface;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.content.Intent;
@@ -268,6 +269,8 @@ public class LoginActivity extends AppCompatActivity {
 
 
     private void goToApplication(FirebaseUser user) {
+        ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.ACCESS_COARSE_LOCATION}, 0);
+
         startActivity(new Intent(this, ConnectionActivity.class));
         writeNewUser(user);
         finish();

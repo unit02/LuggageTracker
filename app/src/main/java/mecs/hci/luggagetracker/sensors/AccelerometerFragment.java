@@ -146,19 +146,37 @@ public class AccelerometerFragment extends Fragment {
                 bean.readAcceleration(new Callback<Acceleration>() {
                     @Override
                     public void onResult(final Acceleration result) {
-                        getActivity().runOnUiThread(new Runnable() {
-                            public void run() {
-//                                XTextView.setText(Double.toString(result.x()));
-//                                YTextView.setText(Double.toString(result.y()));
-//                                ZTextView.setText(Double.toString(result.z()));
+
+                        final Acceleration acceleration = new AccelerationFake(result.x(),result.y(),result.z());
+                        // detect movement
+                        if (previousAccel != null) {
+                            if (isKnocked(acceleration, previousAccel)) {
+                                getActivity().runOnUiThread(new Runnable() {
+                                    public void run() {
+                                        warningLevel.setText("BANG!");
+                                        imageView.setImageResource(R.drawable.luggage_impact);
+//                                for (TriggerListener listener : listeners) {
+//                                    listener.significantEventOccurred(mAuth.getCurrentUser(), Type.MOTION);
+//                                }
+                                    }
+                                });
+                            } else if (accelerometerMoving(acceleration, previousAccel)) {
+                                getActivity().runOnUiThread(new Runnable() {
+                                    public void run() {
+                                        warningLevel.setText("MOVING");
+                                        imageView.setImageResource(R.drawable.walking_with_luggage);
+                                    }
+                                });
+                            } else {
+                                getActivity().runOnUiThread(new Runnable() {
+                                    public void run() {
+                                        warningLevel.setText("STILL");
+                                        imageView.setImageResource(R.drawable.luggage_still);
+                                    }
+                                });
                             }
-                        });
-                        // TODO setup this method for when bean actually works
-//                        getActivity().runOnUiThread(new Runnable() {
-//                            public void run() {
-//
-//                            }
-//                        });
+                        }
+                        previousAccel = acceleration;
                     }
                 });
             }
