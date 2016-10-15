@@ -28,14 +28,17 @@
         >
     </android.support.v4.view.ViewPager>
 
+
     <ImageView
         android:layout_width="40dp"
         android:layout_height="40dp"
-        app:srcCompat="@drawable/icon_swipe"
+        android:src="@drawable/icon_swipe"
         android:id="@+id/imageView"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_marginBottom="20dp"
         android:layout_marginLeft="20dp"/>
+
+
 
 </RelativeLayout>

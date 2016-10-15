@@ -5,36 +5,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="mecs.hci.luggagetracker.sensors.LocationFragment">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:background="@color/colorPrimary"
-        android:id="@+id/bar">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:gravity="center_horizontal"
-            >
-
-            <TextView
-                android:text="LOCATION"
-                android:textStyle="bold"
-                android:textSize="25sp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/white"
-                android:layout_gravity="center"
-                android:id="@+id/title" />
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/ic_place_white_36dp"
-                android:layout_gravity="center"
-                android:layout_marginLeft="10dp"
-                />
-        </LinearLayout>
-    </LinearLayout>
 
     <ImageView
         android:layout_width="30dp"

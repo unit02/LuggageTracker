@@ -13,9 +13,10 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
         android:layout_marginTop="25dp"
-        android:layout_marginStart="20dp"
+        android:layout_marginStart="25dp"
         android:alpha="0.6"
         />
+
 
     <Switch
         android:layout_width="wrap_content"
