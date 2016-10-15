@@ -35,7 +35,6 @@ public class LocationFragment extends Fragment implements OnMapReadyCallback  {
 
 
     private Timer timer;
-    private TextView mTitle;
 
 
     public LocationFragment() {
@@ -56,10 +55,8 @@ public class LocationFragment extends Fragment implements OnMapReadyCallback  {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_location, container, false);
-        mTitle = (TextView) rootView.findViewById(R.id.title);
 
         Typeface custom_font = Typeface.createFromAsset(getContext().getAssets(),  "fonts/Montserrat-Regular.otf");
-        mTitle.setTypeface(custom_font);
 
         startMonitoringLocation();
 

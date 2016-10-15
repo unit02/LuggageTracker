@@ -5,64 +5,33 @@
     android:layout_height="match_parent"
     tools:context="mecs.hci.luggagetracker.sensors.AccelerometerFragment">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:background="@color/colorPrimary"
-        android:orientation="horizontal"
-        android:id="@+id/bar">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:gravity="center_horizontal"
-            >
-
-            <TextView
-                android:text="MOTION"
-                android:textStyle="bold"
-                android:textSize="25sp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/white"
-                android:layout_gravity="center"
-                android:id="@+id/title" />
-            <ImageView
-                android:layout_width="35dp"
-                android:layout_height="35dp"
-                android:background="@drawable/icon_impact"
-                android:layout_gravity="center"
-                android:layout_marginLeft="10dp"
-                />
-        </LinearLayout>
-    </LinearLayout>
 
     <ImageView
         android:layout_width="30dp"
         android:layout_height="30dp"
-        app:srcCompat="@drawable/question_mark"
+        android:src="@drawable/ic_info_outline_black_36dp"
         android:id="@+id/helpBtn"
-        android:onClick="showHelp"
         android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginTop="35dp"
-        android:layout_marginRight="20dp"/>
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="25dp"
+        android:layout_marginStart="25dp"
+        android:alpha="0.6"
+        />
+
 
     <TextView
-        android:text="Current Luggage Movement"
+        android:text="Current Status"
         android:textSize="24sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:padding="5dp"
-        android:elevation="2dp"
-        android:background="@drawable/rounded_main"
+        android:textColor="@color/colorPrimaryDark"
         android:id="@+id/warningLabel"
         android:layout_marginLeft="3dp"
         android:layout_marginRight="3dp"
-        android:layout_below="@+id/bar"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="54dp" />
+        android:layout_marginTop="100dp" />
 
     <ImageView
         android:id="@+id/luggageImage"
@@ -71,7 +40,7 @@
         app:srcCompat="@drawable/luggage_still"
         android:layout_below="@+id/warningLabel"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="41dp" />
+        android:layout_marginTop="30dp" />
 
     <TextView
         android:text="Still"
@@ -80,7 +49,6 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:padding="5dp"
-        android:elevation="2dp"
         android:id="@+id/warningLevel"
         android:layout_marginLeft="3dp"
         android:layout_marginRight="3dp"

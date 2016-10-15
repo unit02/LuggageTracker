@@ -2,11 +2,12 @@
 <resources>
     <color name="colorPrimary">#6593b6</color>
     <color name="colorPrimaryDark">#4f7591</color>
-    <color name="colorAccent">#f7f7f7</color>
-    <color name="colorBackground">#dfdfdf</color>
+    <color name="colorAccent">#4f7591</color>
+    <color name="colorBackground">#ffffff</color>
+    <color name="black">#000000</color>
 
     <color name="tab_default">#6593b6</color>
-    <color name="tab_indicator">#f7f7f7</color>
+    <color name="tab_indicator">#4f7591</color>
 
     <color name="facebookColour">#3B5998</color>
     <color name="white">#ffffff</color>

@@ -61,7 +61,6 @@ public class LogFragment extends Fragment {
     private DatabaseReference mRef;
     private DatabaseReference mLogRef;
 
-    private TextView mTitle;
 
     public LogFragment() {
         // Required empty public constructor
@@ -109,8 +108,6 @@ public class LogFragment extends Fragment {
 
         Typeface custom_font = Typeface.createFromAsset(getContext().getAssets(),  "fonts/Montserrat-Regular.otf");
 
-        mTitle = (TextView) view.findViewById(R.id.title);
-        mTitle.setTypeface(custom_font);
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         Log.d("CJ", sdf.format(new Date()));
 

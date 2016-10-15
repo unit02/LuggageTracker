@@ -62,11 +62,9 @@ public class TemperatureFragment extends Fragment {
         progressBar = (ProgressBar)rootView.findViewById(R.id.progressBar);
         temperatureTextView = (TextView)rootView.findViewById(R.id.currentTempTextView);
         mTemperatureCurrent = (TextView)rootView.findViewById(R.id.currentTempertureTitleTextView);
-        mTitle = (TextView) rootView.findViewById(R.id.title);
 
         Typeface custom_font = Typeface.createFromAsset(getContext().getAssets(),  "fonts/Montserrat-Regular.otf");
         temperatureTextView.setTypeface(custom_font);
-        mTitle.setTypeface(custom_font);
         mTemperatureCurrent.setTypeface(custom_font);
         bean = CurrentBean.getBean();
 

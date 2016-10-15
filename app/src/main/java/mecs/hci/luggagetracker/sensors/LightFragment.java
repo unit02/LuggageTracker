@@ -34,7 +34,6 @@ public class LightFragment extends Fragment {
     public static String TAG = "lightFragment";
 
     private TextView lightTextView;
-    private TextView mTitle;
     private TextView mLuxText;
     private ProgressBar progressBar;
 
@@ -69,10 +68,8 @@ public class LightFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_light, container, false);
         progressBar = (ProgressBar)rootView.findViewById(R.id.progressBar);
         lightTextView = (TextView)rootView.findViewById(R.id.currentlightTextView);
-        mTitle = (TextView) rootView.findViewById(R.id.title);
         mLuxText = (TextView) rootView.findViewById(R.id.currentlightTitleTextView);
         lightTextView.setTypeface(custom_font);
-        mTitle.setTypeface(custom_font);
         mLuxText.setTypeface(custom_font);
 
         ImageView img = (ImageView) rootView.findViewById(R.id.helpBtn);

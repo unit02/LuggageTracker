@@ -7,21 +7,38 @@
     tools:context="mecs.hci.luggagetracker.SensorViewActivity"
     android:background="@color/colorBackground">
 
+    <android.support.design.widget.TabLayout
+        android:id="@+id/tab_layout"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:background="@color/white"
+        android:elevation="0.5dp"
+        android:minHeight="?attr/actionBarSize"
+        app:tabMode="scrollable"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:tabTextColor="@color/black"
+        app:tabSelectedTextColor="@color/colorPrimaryDark"
+        app:tabTextAppearance="@style/CustomTablayout"/>
+
     <android.support.v4.view.ViewPager
         android:id="@+id/viewpager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_below="@id/tab_layout"
         >
     </android.support.v4.view.ViewPager>
+
 
     <ImageView
         android:layout_width="40dp"
         android:layout_height="40dp"
-        app:srcCompat="@drawable/icon_swipe"
+        android:src="@drawable/icon_swipe"
         android:id="@+id/imageView"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_marginBottom="20dp"
         android:layout_marginLeft="20dp"/>
+
+
 
 </RelativeLayout>
