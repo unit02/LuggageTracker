@@ -9,14 +9,18 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.punchthrough.bean.sdk.Bean;
+import com.punchthrough.bean.sdk.message.Callback;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -25,6 +29,7 @@ import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import mecs.hci.luggagetracker.CurrentBean;
 import mecs.hci.luggagetracker.Models.Type;
 import mecs.hci.luggagetracker.R;
 
@@ -36,6 +41,14 @@ public class LightFragment extends Fragment {
     private TextView lightTextView;
     private TextView mLuxText;
     private ProgressBar progressBar;
+    private ProgressBar progressBar2;
+    private TextView temperatureTextView;
+    private TextView mTemperatureCurrent;
+    private TextView mTemptTextView;
+
+
+    Bean bean;
+
 
     private Timer timer;
     private Random r;
@@ -67,10 +80,20 @@ public class LightFragment extends Fragment {
         Typeface custom_font = Typeface.createFromAsset(getContext().getAssets(),  "fonts/Montserrat-Regular.otf");
         View rootView = inflater.inflate(R.layout.fragment_light, container, false);
         progressBar = (ProgressBar)rootView.findViewById(R.id.progressBar);
+        progressBar2 = (ProgressBar)rootView.findViewById(R.id.progressBar2);
+
         lightTextView = (TextView)rootView.findViewById(R.id.currentlightTextView);
         mLuxText = (TextView) rootView.findViewById(R.id.currentlightTitleTextView);
+        temperatureTextView = (TextView)rootView.findViewById(R.id.currentTempTextView);
+        mTemperatureCurrent = (TextView)rootView.findViewById(R.id.currentTempertureTitleTextView);
+
         lightTextView.setTypeface(custom_font);
         mLuxText.setTypeface(custom_font);
+        temperatureTextView.setTypeface(custom_font);
+        mTemperatureCurrent.setTypeface(custom_font);
+
+        bean = CurrentBean.getBean();
+
 
         ImageView img = (ImageView) rootView.findViewById(R.id.helpBtn);
         img.setOnClickListener(new View.OnClickListener() {
@@ -103,6 +126,61 @@ public class LightFragment extends Fragment {
         super.onDetach();
     }
 
+    private void startMonitoringTemperature(){
+        timer = new Timer();
+        timer.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                bean.readTemperature(new Callback<Integer>() {
+                    @Override
+                    public void onResult(final Integer result) {
+                        Log.d(TAG, "Current Temperature is: " + Integer.toString(result));
+                        getActivity().runOnUiThread(new Runnable() {
+                            public void run() {
+                                temperatureTextView.setText(Integer.toString(result));
+                                // set progress between 250 and 500
+                                progressBar.setProgress((int)((result*(250/30.0))+250));
+                            }
+                        });
+                    }
+                });
+            }
+        }, 0, 250);
+    }
+
+    private void startFakingTemperature(){
+        timer = new Timer();
+        timer.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                final int temp;
+                int ran = new Random().nextInt(10);
+                if (ran == 3) {
+                    //temp = 25;
+                    if (new Random().nextInt(10) == 10) {
+                        temp = 26;
+                        // TODO trigger notification thingy
+                    } else {
+                        temp = 25;
+                    }
+                } else if(ran == 4) {
+                    temp = 23;
+                } else {
+                    temp = 24;
+                }
+                getActivity().runOnUiThread(new Runnable() {
+                    public void run() {
+                        temperatureTextView.setText(Integer.toString(temp));
+                        // set progress between 250 and 500
+                        progressBar2.setProgress((int)((temp*(250/30.0))+250));
+                    }
+                });
+            }
+        }, 0, 250);
+    }
+
+
+
     private void startMonitoringlight(){
 
         timer = new Timer();
@@ -117,7 +195,7 @@ public class LightFragment extends Fragment {
                         lightTextView.setText(lightIntensity + "");
                         // set progress between 250 and 500
                         progressBar.setProgress(((lightIntensity*(250/120) * 2)));
-
+                        Log.d("PROGRESS", "hello");
                         setBarColour(progressBar, lightIntensity);
 
                         if (lightIntensity > 120) {
@@ -125,6 +203,47 @@ public class LightFragment extends Fragment {
                                     listener.significantEventOccurred(mAuth.getCurrentUser(), Type.LIGHT);
                                 }
                         }
+
+                        if (bean != null) {
+                            bean.readTemperature(new Callback<Integer>() {
+                                @Override
+                                public void onResult(final Integer result) {
+                                    Log.d(TAG, "Current Temperature is: " + Integer.toString(result));
+                                    getActivity().runOnUiThread(new Runnable() {
+                                        public void run() {
+                                            temperatureTextView.setText(Integer.toString(result));
+                                            // set progress between 250 and 500
+                                            progressBar.setProgress((int)((result*(250/30.0))+250));
+                                        }
+                                    });
+                                }
+                            });
+                        } else {
+                            Toast.makeText(getActivity(), "Bean not connected",
+                                    Toast.LENGTH_SHORT).show();
+                            final int temp;
+                            int ran = new Random().nextInt(10);
+                            if (ran == 3) {
+                                //temp = 25;
+                                if (new Random().nextInt(10) == 10) {
+                                    temp = 26;
+                                    // TODO trigger notification thingy
+                                } else {
+                                    temp = 25;
+                                }
+                            } else if(ran == 4) {
+                                temp = 23;
+                            } else {
+                                temp = 24;
+                            }
+                            getActivity().runOnUiThread(new Runnable() {
+                                public void run() {
+                                    temperatureTextView.setText(Integer.toString(temp));
+                                    // set progress between 250 and 500
+                                    progressBar2.setProgress((int)((temp*(250/30.0))+250));
+                                }
+                            });                        }
+
                     }
                 });
             }
