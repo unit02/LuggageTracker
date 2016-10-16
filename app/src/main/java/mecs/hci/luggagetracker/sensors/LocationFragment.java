@@ -6,6 +6,7 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,9 +21,11 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import mecs.hci.luggagetracker.Models.Type;
 import mecs.hci.luggagetracker.R;
 
 
@@ -32,8 +35,10 @@ public class LocationFragment extends Fragment implements OnMapReadyCallback  {
 
     private TextView LocationTextView;
     private GoogleMap mMap;
-
-
+    private Random r;
+    private LatLng luggageLocation;
+private double lat = 104.9903;
+    private double longitude =39.7392 ;
     private Timer timer;
 
 
@@ -58,7 +63,6 @@ public class LocationFragment extends Fragment implements OnMapReadyCallback  {
 
         Typeface custom_font = Typeface.createFromAsset(getContext().getAssets(),  "fonts/Montserrat-Regular.otf");
 
-        startMonitoringLocation();
 
         ImageView img = (ImageView) rootView.findViewById(R.id.helpBtn);
         img.setOnClickListener(new View.OnClickListener() {
@@ -91,14 +95,31 @@ public class LocationFragment extends Fragment implements OnMapReadyCallback  {
         super.onDetach();
     }
 
-    private void startMonitoringLocation(){
-        timer = new Timer();
+    private void startMonitoringLocation(GoogleMap googleMap){
+mMap = googleMap; timer = new Timer();
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
-          //upadte location on google maps every 5 seconds or so
+                //update value ever 5 seconds
+                getActivity().runOnUiThread(new Runnable() {
+                    public void run() {
+                        lat -=0.005;
+                       longitude -=0.005;
+                        Log.d(TAG,Double.toString(lat));
+                        Log.d(TAG,Double.toString(longitude));
+
+                        luggageLocation = new LatLng(lat, longitude);
+                       mMap.addMarker(new MarkerOptions().position(luggageLocation)
+                             .title("Luggage"));
+
+                        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
+                                luggageLocation,
+                                15));
+
+                    }
+                });
             }
-        }, 0, 250);
+        }, 0, 10000);
     }
 
     @Override
@@ -114,23 +135,26 @@ public class LocationFragment extends Fragment implements OnMapReadyCallback  {
         if (timer !=  null) {
             timer.cancel();
         }
-        startMonitoringLocation();
+      //startMonitoringLocation();
         super.onResume();
     }
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+//        lat = 104.9903;
+//       longitude =39.7392 ;
 
-
-        // Example LatLng at Mcdonalds Queen St
-        LatLng luggage = new LatLng(-36.850171, 174.765191);
-        mMap.addMarker(new MarkerOptions().position(luggage)
+        lat = -36.850171;
+        longitude =  174.765191;
+         luggageLocation = new LatLng(lat,longitude);
+        mMap.addMarker(new MarkerOptions().position(luggageLocation)
                 .title("Luggage"));
 
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
-                luggage,
+                luggageLocation,
                 15));
+        startMonitoringLocation(mMap);
 
     }
 

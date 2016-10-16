@@ -81,7 +81,7 @@ public class AccelerometerFragment extends Fragment {
 //        mXLabel = (TextView)rootView.findViewById(R.id.xLabel);
 //        mYLabel = (TextView)rootView.findViewById(R.id.yLabel);
 //        mZLabel = (TextView)rootView.findViewById(R.id.zLabel);
-        mTitle = (TextView) rootView.findViewById(R.id.title);
+        mTitle = (TextView) rootView.findViewById(R.id.title_view);
         mWarningLevel = (TextView) rootView.findViewById(R.id.warningLevel);
         mWarningLabel = (TextView) rootView.findViewById(R.id.warningLabel);
 
@@ -153,7 +153,7 @@ public class AccelerometerFragment extends Fragment {
                             if (isKnocked(acceleration, previousAccel)) {
                                 getActivity().runOnUiThread(new Runnable() {
                                     public void run() {
-                                        warningLevel.setText("BANG!");
+                                        mWarningLevel.setText("BANG!");
                                         imageView.setImageResource(R.drawable.luggage_impact);
 //                                for (TriggerListener listener : listeners) {
 //                                    listener.significantEventOccurred(mAuth.getCurrentUser(), Type.MOTION);
@@ -163,14 +163,14 @@ public class AccelerometerFragment extends Fragment {
                             } else if (accelerometerMoving(acceleration, previousAccel)) {
                                 getActivity().runOnUiThread(new Runnable() {
                                     public void run() {
-                                        warningLevel.setText("MOVING");
+                                        mWarningLevel.setText("MOVING");
                                         imageView.setImageResource(R.drawable.walking_with_luggage);
                                     }
                                 });
                             } else {
                                 getActivity().runOnUiThread(new Runnable() {
                                     public void run() {
-                                        warningLevel.setText("STILL");
+                                        mWarningLevel.setText("STILL");
                                         imageView.setImageResource(R.drawable.luggage_still);
                                     }
                                 });
