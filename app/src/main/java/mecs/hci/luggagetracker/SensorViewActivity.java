@@ -46,8 +46,7 @@ public class SensorViewActivity extends AppCompatActivity {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFragment(new SecurityFragment(), "Security");
         adapter.addFragment(new AccelerometerFragment(), "Motion");
-        adapter.addFragment(new LightFragment(), "Light");
-        adapter.addFragment(new TemperatureFragment(), "Temperature");
+        adapter.addFragment(new LightFragment(), "Sensors");
         adapter.addFragment(new LocationFragment(), "Location");
         adapter.addFragment(new LogFragment(), "Log");
         viewPager.setAdapter(adapter);

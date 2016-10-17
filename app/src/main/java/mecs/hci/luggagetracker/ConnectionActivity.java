@@ -76,6 +76,7 @@ public class ConnectionActivity extends AppCompatActivity {
             @Override
             public void onBeanDiscovered(Bean bean, int rssi) {
                 beans.add(bean);
+                Log.d(TAG, "BEAN ADDED");
             }
 
             @Override

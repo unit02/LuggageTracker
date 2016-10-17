@@ -17,53 +17,119 @@
         android:alpha="0.6"
         />
 
-
-    <ProgressBar
-        android:id="@+id/progressBar"
-        style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="300dp"
+    <RelativeLayout
         android:layout_height="300dp"
-        android:max="500"
-        android:progress="420"
-        android:progressDrawable="@drawable/circle_progress_bar"
-        android:layout_below="@+id/bar"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="120dp" />
-
-    <LinearLayout
-        android:id="@+id/cover"
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="151dp"
-        android:background="@color/colorBackground"
-        android:layout_alignBottom="@+id/progressBar"
-        android:layout_alignParentStart="true"></LinearLayout>
-
-    <TextView
-        android:text="76"
-        android:textSize="35sp"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:elevation="2dp"
-        android:id="@+id/currentlightTextView"
-        android:layout_marginBottom="14dp"
-        android:layout_above="@+id/cover"
-        android:layout_centerHorizontal="true" />
+        android:id="@+id/light_meter"
+        >
 
-    <TextView
-        android:text="Current Lux"
-        android:textColor="@color/colorPrimaryDark"
-        android:textSize="24sp"
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:max="500"
+            android:progress="420"
+            android:progressDrawable="@drawable/circle_progress_bar"
+            android:layout_centerHorizontal="true"/>
+
+        <LinearLayout
+            android:id="@+id/cover"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:background="@color/colorBackground"
+            android:layout_alignBottom="@+id/progressBar"
+            android:layout_alignParentStart="true"></LinearLayout>
+
+        <TextView
+            android:text="76"
+            android:textSize="35sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:elevation="2dp"
+            android:id="@+id/currentlightTextView"
+            android:layout_marginBottom="14dp"
+            android:layout_above="@+id/cover"
+            android:layout_centerHorizontal="true" />
+
+        <TextView
+            android:text="Current Lux"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="24sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:padding="5dp"
+            android:elevation="2dp"
+            android:id="@+id/currentlightTitleTextView"
+            android:layout_marginLeft="3dp"
+            android:layout_marginRight="3dp"
+            android:layout_below="@+id/currentlightTextView"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="14dp" />
+
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center_vertical"
-        android:padding="5dp"
-        android:elevation="2dp"
-        android:id="@+id/currentlightTitleTextView"
-        android:layout_marginLeft="3dp"
-        android:layout_marginRight="3dp"
-        android:layout_below="@+id/currentlightTextView"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="14dp" />
+        android:layout_height="300dp"
+        android:id="@+id/temp_meter"
+        android:layout_below="@id/light_meter"
+        >
+
+
+        <ProgressBar
+            android:id="@+id/progressBar2"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:max="500"
+            android:progress="420"
+            android:progressDrawable="@drawable/circle_progress_temp"
+            android:layout_centerHorizontal="true" />
+
+        <LinearLayout
+            android:id="@+id/cover2"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="143dp"
+            android:background="@color/colorBackground"
+            android:layout_alignBottom="@+id/progressBar2"
+            android:layout_alignParentStart="true"></LinearLayout>
+
+        <TextView
+            android:text="25"
+            android:textSize="35sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:elevation="2dp"
+            android:id="@+id/currentTempTextView"
+            android:layout_above="@+id/cover2"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="14dp" />
+
+        <TextView
+            android:text="Current Temp"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="24sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:padding="5dp"
+            android:elevation="2dp"
+            android:id="@+id/currentTempertureTitleTextView"
+            android:layout_marginLeft="3dp"
+            android:layout_marginRight="3dp"
+            android:layout_below="@+id/currentTempTextView"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp" />
+
+
+    </RelativeLayout>
+
 
 </RelativeLayout>
