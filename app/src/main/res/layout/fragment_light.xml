@@ -6,17 +6,6 @@
     tools:context="mecs.hci.luggagetracker.sensors.LightFragment">
 
 
-    <ImageView
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:src="@drawable/ic_info_outline_black_36dp"
-        android:id="@+id/helpBtn"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:layout_margin="25dp"
-        android:alpha="0.6"
-        />
-
     <RelativeLayout
         android:layout_height="300dp"
         android:layout_width="wrap_content"
@@ -96,7 +85,7 @@
             android:id="@+id/cover2"
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="143dp"
+            android:layout_height="150dp"
             android:background="@color/colorBackground"
             android:layout_alignBottom="@+id/progressBar2"
             android:layout_alignParentStart="true"></LinearLayout>
@@ -130,6 +119,17 @@
 
 
     </RelativeLayout>
+
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/ic_info_outline_black_36dp"
+        android:id="@+id/helpBtn"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_margin="25dp"
+        android:alpha="0.6"
+        />
 
 
 </RelativeLayout>
