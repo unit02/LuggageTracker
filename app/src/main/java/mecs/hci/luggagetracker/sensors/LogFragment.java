@@ -2,17 +2,23 @@ package mecs.hci.luggagetracker.sensors;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Typeface;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.DisplayMetrics;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.PopupWindow;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.util.Log;
 
@@ -36,6 +42,7 @@ public class LogFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
+
     private RecyclerView mRecyclerView;
     private RecyclerView.LayoutManager mLayoutManager;
     private FirebaseRecyclerAdapter<Event, LogHolder> mRecyclerViewAdapter;
@@ -46,7 +53,9 @@ public class LogFragment extends Fragment {
     private DatabaseReference mRef;
     private DatabaseReference mLogRef;
 
-
+    private LayoutInflater mLayoutInflater;
+    private PopupWindow mPopupWindow;
+    private RelativeLayout mLayout;
     public LogFragment() {
         // Required empty public constructor
     }
@@ -125,9 +134,47 @@ public class LogFragment extends Fragment {
                 logView.mView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-//                        Intent intent = new Intent(view.getContext(), LogDescriptionActivity.class);
-//                        intent.putExtra("log", log);
-//                        startActivity(intent);
+                        DisplayMetrics dm = new DisplayMetrics();
+                        getActivity().getWindowManager().getDefaultDisplay().getMetrics(dm);
+
+                        final int width = dm.widthPixels;
+                        final int height = dm.heightPixels;
+                        mLayoutInflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+                        View popupView = mLayoutInflater.inflate(R.layout.log_popup, null);
+                        TextView popupText = (TextView) popupView.findViewById(R.id.log_info);
+                        Resources res = getResources();
+
+                        if (log.getType() == Type.LIGHT) {
+                            String text = String.format(res.getString(R.string.light_popup), log.getTime());
+                            popupText.setText(text);
+
+                        }
+                        else if (log.getType() == Type.TEMPERATURE) {
+                            String text = String.format(res.getString(R.string.temp_popup), log.getTime());
+                            popupText.setText(text);
+
+                        }
+
+                        else {
+                            String text = String.format(res.getString(R.string.motion_popup), log.getTime());
+                            popupText.setText(text);
+
+                        }
+
+                        PopupWindow popupWindow = new PopupWindow(popupView,
+                                (int) (width * 0.8), ViewGroup.LayoutParams.WRAP_CONTENT, true);
+                        // If the PopupWindow should be focusable
+                        popupWindow.setFocusable(true);
+
+                        // If you need the PopupWindow to dismiss when when touched outside
+                        popupWindow.setBackgroundDrawable(new ColorDrawable());
+
+                        // Get the View's(the one that was clicked in the Fragment) location
+
+                        popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
+                        popupWindow.setBackgroundDrawable(new ColorDrawable(getResources().getColor(android.R.color.transparent)));
+                        popupWindow.setOutsideTouchable(true);
                     }
                 });
             }
