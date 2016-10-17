@@ -292,16 +292,6 @@ public class LightFragment extends Fragment {
         new AlertDialog.Builder(getContext())
                 .setTitle("Light")
                 .setMessage("The light sensor within the suitcases detects the current lux value. This can be used to indicate if the bag is opened as light will be detected. If the lux value exceeds 120 it will be recorded in the log")
-//                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-//                    public void onClick(DialogInterface dialog, int which) {
-//                        // continue with delete
-//                    }
-//                })
-//                .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
-//                    public void onClick(DialogInterface dialog, int which) {
-//                        // do nothing
-//                    }
-//                })
                 .setIcon(R.drawable.question_mark_dark)
                 .show();
     }
