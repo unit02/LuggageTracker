@@ -108,7 +108,6 @@ public class LightFragment extends Fragment {
         r = new Random();
         startMonitoringlight();
 
-
         return rootView;
     }
 
@@ -219,8 +218,7 @@ public class LightFragment extends Fragment {
                                 }
                             });
                         } else {
-                            Toast.makeText(getActivity(), "Bean not connected",
-                                    Toast.LENGTH_SHORT).show();
+
                             final int temp;
                             int ran = new Random().nextInt(10);
                             if (ran == 3) {

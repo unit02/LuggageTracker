@@ -17,25 +17,23 @@
         />
 
 
+    <ImageView
+        android:layout_width="250dp"
+        android:layout_height="275dp"
+        app:srcCompat="@drawable/locked_icon"
+        android:id="@+id/imageView"
+        android:layout_marginTop="78dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
     <Switch
         android:layout_width="wrap_content"
         android:layout_height="20dp"
         android:id="@+id/securityBtn"
-        android:layout_marginTop="130dp"
         android:textOn="On"
         android:textOff="Off"
-        android:switchMinWidth="70dp"
+        android:textColor="@color/colorPrimary"
+        android:switchMinWidth="100dp"
+        android:layout_alignBottom="@+id/imageView"
         android:layout_centerHorizontal="true" />
-
-    <ImageView
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        app:srcCompat="@drawable/locked_icon"
-        android:id="@+id/imageView"
-        android:layout_below="@+id/securityBtn"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="30dp"/>
-
-
-
 </RelativeLayout>
