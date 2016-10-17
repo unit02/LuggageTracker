@@ -200,8 +200,8 @@ public class LightFragment extends Fragment {
 
                         if (lightIntensity > 120) {
                             for (TriggerListener listener : listeners) {
-                                    listener.significantEventOccurred(mAuth.getCurrentUser(), Type.LIGHT);
-                                }
+                                listener.significantEventOccurred(mAuth.getCurrentUser(), Type.LIGHT);
+                            }
                         }
 
                         if (bean != null) {
@@ -214,6 +214,13 @@ public class LightFragment extends Fragment {
                                             temperatureTextView.setText(Integer.toString(result));
                                             // set progress between 250 and 500
                                             progressBar.setProgress((int)((result*(250/30.0))+250));
+
+                                            if (result > 29) {
+                                                for (TriggerListener listener : listeners) {
+                                                    listener.significantEventOccurred(mAuth.getCurrentUser(), Type.TEMPERATURE);
+                                                }
+                                            }
+
                                         }
                                     });
                                 }
