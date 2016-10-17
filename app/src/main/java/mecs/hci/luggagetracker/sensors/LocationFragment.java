@@ -96,7 +96,8 @@ private double lat = 104.9903;
     }
 
     private void startMonitoringLocation(GoogleMap googleMap){
-mMap = googleMap; timer = new Timer();
+mMap = googleMap;
+        timer = new Timer();
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
@@ -162,16 +163,6 @@ mMap = googleMap; timer = new Timer();
         new AlertDialog.Builder(getContext())
                 .setTitle("Location")
                 .setMessage("The GPS within the luggage tracks its current location which is displayed on the map. It can be used to check your luggage is where you expect")
-//                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-//                    public void onClick(DialogInterface dialog, int which) {
-//                        // continue with delete
-//                    }
-//                })
-//                .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
-//                    public void onClick(DialogInterface dialog, int which) {
-//                        // do nothing
-//                    }
-//                })
                 .setIcon(R.drawable.question_mark_dark)
                 .show();
     }

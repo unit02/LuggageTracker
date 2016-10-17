@@ -177,16 +177,6 @@ public class TemperatureFragment extends Fragment {
         new AlertDialog.Builder(getContext())
                 .setTitle("Temperature")
                 .setMessage("Use the temperature sensor to ensure your goods remain in the optimal conditions. If the suitcases temperature exceeds 25 degrees it will be recorded in the log")
-//                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-//                    public void onClick(DialogInterface dialog, int which) {
-//                        // continue with delete
-//                    }
-//                })
-//                .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
-//                    public void onClick(DialogInterface dialog, int which) {
-//                        // do nothing
-//                    }
-//                })
                 .setIcon(R.drawable.question_mark_dark)
                 .show();
     }
