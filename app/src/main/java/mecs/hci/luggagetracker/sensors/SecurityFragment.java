@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.ImageView;
@@ -43,7 +44,7 @@ public class SecurityFragment extends Fragment {
 
         imageView = (ImageView)rootView.findViewById(R.id.imageView);
         btn = (Switch) rootView.findViewById(R.id.securityBtn);
-        btn.setOnClickListener(listener);
+        imageView.setOnClickListener(listener);
         Typeface custom_font = Typeface.createFromAsset(getContext().getAssets(),  "fonts/Montserrat-Regular.otf");
 
         //rootView.findViewById(R.id.progressBar).getBackground().setLevel(5000);
@@ -53,6 +54,18 @@ public class SecurityFragment extends Fragment {
         img.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 showHelp();
+            }
+        });
+
+        btn.setChecked(isLocked);
+        btn.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (isLocked) {
+                    unlock();
+                } else {
+                    lock();
+                }
             }
         });
 
