@@ -78,8 +78,6 @@ public class TemperatureFragment extends Fragment {
         if (bean != null) {
             startMonitoringTemperature();
         } else {
-            Toast.makeText(getActivity(), "Bean not connected",
-                    Toast.LENGTH_SHORT).show();
             startFakingTemperature();
         }
 
@@ -166,8 +164,7 @@ public class TemperatureFragment extends Fragment {
         if (bean != null) {
             startMonitoringTemperature();
         } else {
-            Toast.makeText(getActivity(), "Bean not connected",
-                    Toast.LENGTH_SHORT).show();
+
             startFakingTemperature();
         }
         super.onResume();
