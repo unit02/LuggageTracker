@@ -44,7 +44,7 @@
             android:layout_centerHorizontal="true" />
 
         <TextView
-            android:text="Current Lux"
+            android:text="Light Exposure (Lux)"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="24sp"
             android:layout_width="wrap_content"
@@ -102,7 +102,7 @@
             android:layout_marginBottom="14dp" />
 
         <TextView
-            android:text="Current Temp"
+            android:text="Temperature (°C)"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="24sp"
             android:layout_width="wrap_content"

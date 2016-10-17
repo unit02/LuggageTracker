@@ -91,6 +91,7 @@ public class LoginActivity extends AppCompatActivity {
 
 
         animateLogo();
+        ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.ACCESS_COARSE_LOCATION}, 0);
 
 
 
@@ -269,7 +270,6 @@ public class LoginActivity extends AppCompatActivity {
 
 
     private void goToApplication(FirebaseUser user) {
-        ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.ACCESS_COARSE_LOCATION}, 0);
 
         startActivity(new Intent(this, ConnectionActivity.class));
         writeNewUser(user);
