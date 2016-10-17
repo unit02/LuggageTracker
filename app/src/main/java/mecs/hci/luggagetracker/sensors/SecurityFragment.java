@@ -27,7 +27,6 @@ public class SecurityFragment extends Fragment {
     private ImageView imageView;
 
     public SecurityFragment() {
-        // Required empty public constructor
     }
 
     @Override
@@ -101,16 +100,6 @@ public class SecurityFragment extends Fragment {
         new AlertDialog.Builder(getContext())
                 .setTitle("Security")
                 .setMessage("This screen can be used to activate and deactivate the luggages alarm. When armed the alarm will go off if the lock is tampered with or the light sensor indicates the bag is opened.")
-//                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-//                    public void onClick(DialogInterface dialog, int which) {
-//                        // continue with delete
-//                    }
-//                })
-//                .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
-//                    public void onClick(DialogInterface dialog, int which) {
-//                        // do nothing
-//                    }
-//                })
                 .setIcon(R.drawable.question_mark_dark)
                 .show();
     }
