@@ -32,4 +32,7 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_maps">Map</string>
+    <string name="light_popup">Looks like the light sensor was triggered at %1$s! This could mean that your luggage was opened then so we noted it here just in case it was important! </string>
+    <string name="temp_popup">Looks like the temperature sensor was triggered at %1$s! This is usually triggered when the temperature gets too hot or too cold. You might have things inside your luggage that are temperature sensitive so we noted it here just in case it was important!</string>
+    <string name="motion_popup">Looks like the motion sensor was triggered at %1$s! Nobody wants their luggage to be thrown around and this may have been the case here. We thought it was important so we noted it here! </string>
 </resources>
